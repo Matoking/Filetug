@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Name=Filetug
+Icon=harbour-filetug
+Exec=harbour-filetug

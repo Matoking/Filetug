@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="qr_donate">data/images/bitcoin_qr_code.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>data/icons/folder25.svg</file>
+        <file>data/icons/arrow80.svg</file>
+        <file>data/icons/page13.svg</file>
+        <file alias="android">data/icons/frontal3.svg</file>
+        <file>data/icons/page28.svg</file>
+        <file>data/icons/musical6.svg</file>
+        <file>data/icons/image3.svg</file>
+        <file alias="audio">data/icons/audio-x-generic.svg</file>
+        <file alias="image">data/icons/image-x-generic.svg</file>
+        <file alias="video">data/icons/video-x-generic.svg</file>
+        <file alias="text">data/icons/text-x-generic.svg</file>
+        <file alias="directory">data/icons/folder.svg</file>
+        <file alias="unknown">data/icons/generic.svg</file>
+        <file alias="executable">data/icons/emblem-system.svg</file>
+        <file alias="previous">data/icons/go-previous.svg</file>
+        <file alias="home">data/icons/go-home.svg</file>
+        <file alias="next">data/icons/go-next.svg</file>
+        <file alias="properties">data/icons/document-properties.svg</file>
+        <file alias="pause">data/icons/media-playback-pause.svg</file>
+    </qresource>
+</RCC>

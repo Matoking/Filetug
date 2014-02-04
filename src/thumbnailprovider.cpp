@@ -1,0 +1,42 @@
+#include "thumbnailprovider.h"
+
+QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+{
+    qDebug(id.toLatin1());
+    QFileInfo fileInfo(id);
+
+    // Check that the directory for thumbnails exists
+    QDir thumbDir(QString("%1/.thumbs").arg(fileInfo.absolutePath()));
+    if (!thumbDir.exists())
+    {
+        bool succ = thumbDir.mkdir(QString("%1/.thumbs").arg(fileInfo.absolutePath()));
+    }
+
+    QString thumbnailPath = QString("%1/.thumbs/%2.cache").arg(fileInfo.absolutePath(), fileInfo.fileName());
+    QImage thumbnailImage(thumbnailPath);
+
+    if (thumbnailImage.isNull())
+    {
+        qDebug() << "Generating thumbnail for " << id.toLatin1();
+        // Thumbnail not generated, generate it
+        QImage originalImage(fileInfo.absoluteFilePath());
+
+        int requestedHeight = requestedSize.height() == -1 ? 120 : requestedSize.height();
+        int requestedWidth = requestedSize.width() == -1 ? 120 : requestedSize.width();
+
+        originalImage = originalImage.scaled(requestedHeight, requestedWidth, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+        // Save it
+        qDebug() << thumbnailPath.toLatin1();
+        bool success = originalImage.save(thumbnailPath, "PNG");
+
+        return originalImage;
+    }
+    else
+    {
+        return thumbnailImage;
+    }
+
+    // Return null image if all else fails
+    return QImage();
+}

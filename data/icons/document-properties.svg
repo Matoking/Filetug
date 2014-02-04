@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 9.0, SVG Export Plug-In  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="96"
+   height="96"
+   viewBox="0 0 96 96"
+   xml:space="preserve"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="document-properties.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"><metadata
+   id="metadata17"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title>Document Properties</dc:title><dc:date>November 2007</dc:date><dc:creator><cc:Agent><dc:title>Jakub Stainer</dc:title></cc:Agent></dc:creator><dc:source>http://www.gnome.org/</dc:source><dc:subject><rdf:Bag><rdf:li>document</rdf:li><rdf:li>properties</rdf:li></rdf:Bag></dc:subject><dc:contributor><cc:Agent><dc:title>Canvas resize and pixel perfect by Luca Ferretti</dc:title></cc:Agent></dc:contributor><cc:license
+         rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/" /></cc:Work><cc:License
+       rdf:about="http://creativecommons.org/licenses/LGPL/2.1/"><cc:permits
+         rdf:resource="http://web.resource.org/cc/Reproduction" /><cc:permits
+         rdf:resource="http://web.resource.org/cc/Distribution" /><cc:requires
+         rdf:resource="http://web.resource.org/cc/Notice" /><cc:permits
+         rdf:resource="http://web.resource.org/cc/DerivativeWorks" /><cc:requires
+         rdf:resource="http://web.resource.org/cc/ShareAlike" /><cc:requires
+         rdf:resource="http://web.resource.org/cc/SourceCode" /></cc:License></rdf:RDF></metadata><defs
+   id="defs15">
+		
+	
+			
+			
+		</defs><sodipodi:namedview
+   inkscape:window-height="743"
+   inkscape:window-width="1280"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   guidetolerance="10.0"
+   gridtolerance="10.0"
+   objecttolerance="10.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   width="48px"
+   height="48px"
+   showgrid="true"
+   inkscape:grid-points="true"
+   inkscape:zoom="3.796875"
+   inkscape:cx="-22.485597"
+   inkscape:cy="24"
+   inkscape:window-x="0"
+   inkscape:window-y="25"
+   inkscape:current-layer="svg2"
+   inkscape:window-maximized="0" />
+	<rect
+   style="opacity:0.6;fill:none;stroke:none"
+   id="rect2169"
+   width="48"
+   height="48"
+   x="24"
+   y="24" /><path
+   sodipodi:nodetypes="ccccccccsccsccc"
+   id="path3149"
+   d="m 64,51 c 1.3,-1.2 1.4,-2.5 2,-4 l -2,-6 -6,6 -7,-2 -2,-7 6,-6 -6,-2 c -1.5,0.6 -2.8,1.8 -4,3 -3.8,3.8 -4.9,9.3 -3,14 L 31,58 c -1.9,1.9 -1.9,5.1 0,7 1.9,1.9 5.1,1.9 7,0 L 49,54 c 4.7,2 11.2,0.8 15,-3 z"
+   style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+   inkscape:connector-curvature="0" /><path
+   style="fill-rule:nonzero;stroke:none;fill:#bebebe;fill-opacity:1"
+   d="m 64,51 c 1.3,-1.2 1.4,-2.5 2,-4 l -2,-6 -6,6 -7,-2 -2,-7 6,-6 -6,-2 c -1.5,0.6 -2.8,1.8 -4,3 -3.8,3.8 -4.9,9.3 -3,14 L 31,58 c -1.9,1.9 -1.9,5.1 0,7 1.9,1.9 5.1,1.9 7,0 L 49,54 c 4.7,2 11.2,0.8 15,-3 z"
+   id="path9"
+   sodipodi:nodetypes="ccccccccsccsccc"
+   inkscape:connector-curvature="0" />
+	
+<path
+   sodipodi:type="arc"
+   style="fill:#ffffff;fill-opacity:1;stroke:none"
+   id="path2176"
+   sodipodi:cx="10"
+   sodipodi:cy="38"
+   sodipodi:rx="2"
+   sodipodi:ry="2"
+   d="m 12,38 a 2,2 0 1 1 -4,0 2,2 0 1 1 4,0 z"
+   transform="translate(24,24)" /></svg>
