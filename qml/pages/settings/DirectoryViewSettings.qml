@@ -42,6 +42,14 @@ Page {
                     }
                 }
                 TextSwitch {
+                    text: "Show hidden files"
+                    description: "Show hidden files and folders"
+
+                    checked: settings.showHiddenFiles
+
+                    onCheckedChanged: settings.showHiddenFiles = checked
+                }
+                TextSwitch {
                     text: "Show page header"
                     description: "Show page header with the current path"
 

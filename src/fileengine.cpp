@@ -12,10 +12,12 @@ FileEngine::FileEngine(QObject *parent) :
     settings = new Settings();
     coverModel = new CoverModel();
 
+    fileList->setShowHiddenFiles(settings->getShowHiddenFiles());
     fileList->setSortBy(settings->getSortBy());
     fileList->setSortOrder(settings->getSortOrder());
     fileList->setDirOrder(settings->getDirOrder());
 
+    connect(settings, SIGNAL(showHiddenFilesChanged(bool)), fileList, SLOT(setShowHiddenFiles(bool)));
     connect(settings, SIGNAL(sortByChanged(QString)), fileList, SLOT(setSortBy(QString)));
     connect(settings, SIGNAL(sortOrderChanged(QString)), fileList, SLOT(setSortOrder(QString)));
     connect(settings, SIGNAL(dirOrderChanged(QString)), fileList, SLOT(setDirOrder(QString)));

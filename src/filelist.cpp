@@ -3,6 +3,8 @@
 FileList::FileList(QObject *parent) :
     QObject(parent)
 {
+    m_showHiddenFiles = false;
+
     m_sortBy = "";
     m_sortOrder = "";
     m_dirOrder = "";
@@ -101,6 +103,16 @@ QList<FileInfoEntry*> FileList::getFileInfoEntryList(const QString &path, const 
         sortFlags = sortFlags | QDir::DirsLast;
 
     dir.setSorting(sortFlags);
+
+    // Set filters
+    QDir::Filters filters = 0;
+
+    filters = filters | QDir::AllEntries;
+
+    if (m_showHiddenFiles)
+        filters = filters | QDir::Hidden;
+
+    dir.setFilter(filters);
 
     QFileInfoList fileInfoList;
 
@@ -230,6 +242,12 @@ bool FileList::containsFileType(const QString &fileType)
     return m_currentDirFileTypes.contains(fileType);
 }
 
+void FileList::setShowHiddenFiles(const bool &showHiddenFiles)
+{
+    m_showHiddenFiles = showHiddenFiles;
+    resetFileInfoEntryList();
+}
+
 void FileList::setSortBy(const QString &sortBy)
 {
     m_sortBy = sortBy;
@@ -249,7 +267,7 @@ void FileList::setDirOrder(const QString &dirOrder)
 }
 
 /*
- *  Resets the current path, forcing the file list to be retrieved again next time it's requested
+ *  Reset the current path, forcing the file list to be retrieved again next time it's requested
  */
 void FileList::resetFileInfoEntryList()
 {

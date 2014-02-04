@@ -13,6 +13,7 @@ class Settings : public QObject
     // Directory view
     Q_PROPERTY(QString dirPath READ getDirPath WRITE setDirPath NOTIFY dirPathChanged)
     Q_PROPERTY(QString defaultViewMode READ getDefaultViewMode WRITE setDefaultViewMode NOTIFY defaultViewModeChanged)
+    Q_PROPERTY(bool showHiddenFiles READ getShowHiddenFiles WRITE setShowHiddenFiles NOTIFY showHiddenFilesChanged)
     Q_PROPERTY(bool showDirHeader READ getShowDirHeader WRITE setShowDirHeader NOTIFY showDirHeaderChanged)
     Q_PROPERTY(bool galleryMode READ getGalleryMode WRITE setGalleryMode NOTIFY galleryModeChanged)
     Q_PROPERTY(bool displayThumbnails READ getDisplayThumbnails WRITE setDisplayThumbnails NOTIFY displayThumbnailsChanged)
@@ -38,6 +39,10 @@ public:
     // defaultViewMode
     void setDefaultViewMode(const QString &defaultViewMode);
     QString getDefaultViewMode() const;
+
+    // showHiddenFiles
+    void setShowHiddenFiles(const bool &showHiddenFiles);
+    bool getShowHiddenFiles() const;
 
     // showDirHeader
     void setShowDirHeader(const bool &showDirHeader);
@@ -80,6 +85,7 @@ private:
     QString m_defaultViewMode;
     bool m_galleryMode;
 
+    bool m_showHiddenFiles;
     bool m_showDirHeader;
     bool m_displayThumbnails;
     bool m_cacheThumbnails;
@@ -94,6 +100,7 @@ private:
 signals:
     void dirPathChanged(const QString &dirPath);
     void defaultViewModeChanged(const QString &defaultViewMode);
+    void showHiddenFilesChanged(const bool &showHiddenFiles);
     void showDirHeaderChanged(const bool &showDirHeader);
     void galleryModeChanged(const bool &galleryMode);
     void displayThumbnailsChanged(const bool &displayThumbnails);

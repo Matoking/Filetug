@@ -18,6 +18,11 @@ Settings::Settings(QObject *parent) :
     else
         m_defaultViewMode = "grid";
 
+    if (settings->contains("showHiddenFiles"))
+        m_showHiddenFiles = settings->value("showHiddenFiles").toBool();
+    else
+        m_showHiddenFiles = false;
+
     if (settings->contains("showDirHeader"))
         m_showDirHeader = settings->value("showDirHeader").toBool();
     else
@@ -101,6 +106,26 @@ void Settings::setDefaultViewMode(const QString &defaultViewMode)
 QString Settings::getDefaultViewMode() const
 {
     return m_defaultViewMode;
+}
+
+/*
+ *  showHiddenFiles - show hidden files and folders
+ */
+void Settings::setShowHiddenFiles(const bool &showHiddenFiles)
+{
+    if (m_showHiddenFiles != showHiddenFiles)
+    {
+        m_showHiddenFiles = showHiddenFiles;
+        settings->setValue("showHiddenFiles", QVariant(showHiddenFiles));
+        settings->sync();
+        emit showHiddenFilesChanged(showHiddenFiles);
+        emit directoryViewSettingsChanged();
+    }
+}
+
+bool Settings::getShowHiddenFiles() const
+{
+    return m_showHiddenFiles;
 }
 
 /*

@@ -36,6 +36,8 @@ public:
 
     QString m_fileTypes;
 
+    bool m_showHiddenFiles;
+
     QString m_sortBy;
     QString m_sortOrder;
     QString m_dirOrder;
@@ -47,6 +49,8 @@ signals:
     void currentDirectoryChanged(const QString &currentDirectory);
 
 public slots:
+    void setShowHiddenFiles(const bool &showHiddenFiles);
+
     void setSortBy(const QString &sortBy);
     void setSortOrder(const QString &sortOrder);
     void setDirOrder(const QString &dirOrder);
