@@ -64,7 +64,7 @@ Page {
 
                     font.pixelSize: Theme.fontSizeSmall
 
-                    text: "If you enjoy using this software, please consider making a donation. Every cent counts. :)"
+                    text: "If you enjoy using this software, please consider making a donation. Every cent counts and inspires me to make this application even better. :)"
                 }
 
                 Row {
@@ -163,17 +163,16 @@ Page {
 
                         width: parent.width
 
-                        text: "You can send money to the following email address using PayPal"
+                        text: "You can donate money through PayPal using the following link"
                     }
-                    Label {
-                        color: Theme.highlightColor
-                        horizontalAlignment: Text.Center
-                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                        font.pixelSize: Theme.fontSizeSmall
+                    Button {
+                        text: "Donate"
 
-                        width: parent.width
+                        anchors.horizontalCenter: parent.horizontalCenter
 
-                        text: "jannepulk@gmail.com"
+                        onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TGAFUSVBRXTTW")
+
+                        width: parent.height > parent.width ? parent.height / 3 : parent.width / 3
                     }
                 }
 

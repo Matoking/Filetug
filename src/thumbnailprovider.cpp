@@ -5,6 +5,12 @@ QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSi
     qDebug(id.toLatin1());
     QFileInfo fileInfo(id);
 
+    // Check that the file is actually an image before creating a directory
+    // and trying to create a thumbnail
+    if (!id.endsWith(".png") && !id.endsWith(".jpg") && !id.endsWith(".jpeg")
+            && !id.endsWith(".gif") && !id.endsWith(".svg"))
+        return QImage();
+
     // Check that the directory for thumbnails exists
     QDir thumbDir(QString("%1/.thumbs").arg(fileInfo.absolutePath()));
     if (!thumbDir.exists())
