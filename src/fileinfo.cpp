@@ -48,13 +48,19 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
     else
     {
         // Add directory details
+        fileDetails.insert("Last modified", fileInfo.lastModified().toString());
+        fileDetails.insert("Created", fileInfo.created().toString());
+
+        detailEntries.insert("Directory details", fileDetails);
     }
 
     // Get file format name
     QString fileFormat = getFileFormatName(fileInfo.suffix());
 
-    if (fileFormat != "")
+    if (fileFormat != "" && !isDir)
         replyMap.insert("fileFormat", fileFormat);
+    else
+        replyMap.insert("fileFormat", "Directory");
 
     replyMap.insert("details", detailEntries);
 

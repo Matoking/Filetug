@@ -32,7 +32,6 @@ OTHER_FILES += \
     harbour-filetug.desktop \
     qml/pages/SettingsPage.qml \
     qml/pages/ImageView.qml \
-    qml/pages/DirectoryView.qml \
     qml/pages/dirView/DirectoryGridView.qml \
     qml/js/directoryViewModel.js \
     qml/pages/dirView/DirectoryPullDownMenu.qml \
@@ -46,7 +45,6 @@ OTHER_FILES += \
     qml/pages/fileView/FileInfo.qml \
     qml/js/imageView.js \
     qml/pages/fileView/AnimatedImageView.qml \
-    qml/pages/fileView/StupidImage.qml \
     qml/pages/fileView/Image.qml \
     qml/pages/fileView/Video.qml \
     qml/pages/fileView/Text.qml \
@@ -56,7 +54,8 @@ OTHER_FILES += \
     qml/pages/FileRenameDialog.qml \
     qml/pages/NewFilesDialog.qml \
     qml/pages/settings/FileDisplay.qml \
-    qml/Filetug.qml
+    qml/Filetug.qml \
+    qml/pages/DirectoryPage.qml
 
 HEADERS += \
     src/thumbnailprovider.h \

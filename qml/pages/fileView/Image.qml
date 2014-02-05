@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 // ABANDON ALL HOPE YE WHO ENTER HERE
 
 Flickable {
-    id: imageView
+    id: fileView
 
     signal fileLoaded()
     signal screenClicked()
@@ -83,7 +83,7 @@ Flickable {
         asynchronous: fileEntry.fullPath.substring(fileEntry.fullPath.length-3, fileEntry.fullPath.length) == "gif" ? true : false
         onLoaded: {
             imageLoaded()
-            imageView.fileLoaded()
+            fileView.fileLoaded()
         }
     }
 
@@ -123,22 +123,22 @@ Flickable {
 
     SmoothedAnimation {
         id: animateCollapseLeft
-        target: imageView
+        target: fileView
         properties: "x"
-        from: imageView.x
-        to: imageView.x - imageView.width
+        from: fileView.x
+        to: fileView.x - fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) imageView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     SmoothedAnimation {
         id: animateCollapseRight
-        target: imageView
+        target: fileView
         properties: "x"
-        from: imageView.x
-        to: imageView.x + imageView.width
+        from: fileView.x
+        to: fileView.x + fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) imageView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     function loadFile()
@@ -165,19 +165,19 @@ Flickable {
         var fitWidth = imageLoader.item.sourceSize.width
         var fitHeight = imageLoader.item.sourceSize.height
 
-        console.log("Screen size: " + imageView.width + "x" + imageView.height)
+        console.log("Screen size: " + fileView.width + "x" + fileView.height)
         console.log("Original size: " + imageLoader.item.sourceSize.width + "x" + imageLoader.item.sourceSize.height)
 
-        if (imageLoader.item.sourceSize.width > imageView.width)
+        if (imageLoader.item.sourceSize.width > fileView.width)
         {
-            fitWidth = imageView.width
+            fitWidth = fileView.width
 
             fitHeight = (fitWidth * imageLoader.item.sourceSize.height) / imageLoader.item.sourceSize.width
         }
 
         if (fitHeight > parent.height)
         {
-            fitHeight = imageView.height
+            fitHeight = fileView.height
 
             fitWidth = (fitHeight * imageLoader.item.sourceSize.width) / imageLoader.item.sourceSize.height
         }
@@ -210,8 +210,8 @@ Flickable {
      */
     function centerImage()
     {
-        imageView.contentX = (imageLoader.item.width / 2) - (Screen.width / 2)
-        imageView.returnToBounds()
+        fileView.contentX = (imageLoader.item.width / 2) - (Screen.width / 2)
+        fileView.returnToBounds()
     }
 
     /*
@@ -219,7 +219,7 @@ Flickable {
      */
     function imagePinchFinished(pinch)
     {
-        imageView.returnToBounds()
+        fileView.returnToBounds()
     }
 
     /*
@@ -228,19 +228,19 @@ Flickable {
     function updateFlickableSize()
     {
         // WHAT THE FUCK
-        if ((imageLoader.item.scale * imageLoader.item.sourceSize.height) < imageView.height)
+        if ((imageLoader.item.scale * imageLoader.item.sourceSize.height) < fileView.height)
         {
-            imageLoader.item.y = (imageView.height / 2) - ((imageLoader.item.scale * imageLoader.item.sourceSize.height) / 2)
-            imageView.contentY = ((1 - imageLoader.item.scale) * imageLoader.item.sourceSize.height) / 2
+            imageLoader.item.y = (fileView.height / 2) - ((imageLoader.item.scale * imageLoader.item.sourceSize.height) / 2)
+            fileView.contentY = ((1 - imageLoader.item.scale) * imageLoader.item.sourceSize.height) / 2
         }
         else
             imageLoader.item.y = 0
 
         // IS THIS SHIT
-        if ((imageLoader.item.scale * imageLoader.item.sourceSize.width) < imageView.width)
+        if ((imageLoader.item.scale * imageLoader.item.sourceSize.width) < fileView.width)
         {
-            imageLoader.item.x = (imageView.width / 2) - ((imageLoader.item.scale * imageLoader.item.sourceSize.width) / 2)
-            imageView.contentX = ((1 - imageLoader.item.scale) * imageLoader.item.sourceSize.width) / 2
+            imageLoader.item.x = (fileView.width / 2) - ((imageLoader.item.scale * imageLoader.item.sourceSize.width) / 2)
+            fileView.contentX = ((1 - imageLoader.item.scale) * imageLoader.item.sourceSize.width) / 2
         }
         else
             imageLoader.item.x = 0

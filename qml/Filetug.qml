@@ -62,7 +62,7 @@ ApplicationWindow
 
     id: mainWindow
     allowedOrientations: Orientation.All
-    initialPage: Qt.resolvedUrl("pages/DirectoryView.qml")
+    initialPage: Qt.resolvedUrl("pages/DirectoryPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
 

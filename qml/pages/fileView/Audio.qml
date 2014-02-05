@@ -3,7 +3,7 @@ import QtMultimedia 5.0
 import Sailfish.Silica 1.0
 
 Flickable {
-    id: imageView
+    id: fileView
 
     signal fileLoaded()
     signal screenClicked()
@@ -121,22 +121,22 @@ Flickable {
 
     SmoothedAnimation {
         id: animateCollapseLeft
-        target: imageView
+        target: fileView
         properties: "x"
-        from: imageView.x
-        to: imageView.x - imageView.width
+        from: fileView.x
+        to: fileView.x - fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) imageView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     SmoothedAnimation {
         id: animateCollapseRight
-        target: imageView
+        target: fileView
         properties: "x"
-        from: imageView.x
-        to: imageView.x + imageView.width
+        from: fileView.x
+        to: fileView.x + fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) imageView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     Timer {

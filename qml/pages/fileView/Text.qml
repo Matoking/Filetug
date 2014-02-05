@@ -5,7 +5,7 @@ import Sailfish.Silica 1.0
 // ABANDON ALL HOPE YE WHO ENTER HERE
 
 Flickable {
-    id: rootView
+    id: fileView
 
     signal fileLoaded()
     signal screenClicked()
@@ -52,22 +52,22 @@ Flickable {
 
     SmoothedAnimation {
         id: animateCollapseLeft
-        target: rootView
+        target: fileView
         properties: "x"
-        from: rootView.x
-        to: rootView.x - rootView.width
+        from: fileView.x
+        to: fileView.x - fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) rootView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     SmoothedAnimation {
         id: animateCollapseRight
-        target: rootView
+        target: fileView
         properties: "x"
-        from: rootView.x
-        to: rootView.x + rootView.width
+        from: fileView.x
+        to: fileView.x + fileView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) rootView.destroy()
+        onStopped: if (destroyAfterTransition) fileView.destroy()
     }
 
     function loadFile()

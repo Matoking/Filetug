@@ -4,7 +4,7 @@ import "../../js/misc.js" as Misc
 import "../../js/directoryViewModel.js" as DirectoryViewModel
 
 Page {
-    id: fileInfoView
+    id: page
 
     property var fileEntry: null
 
