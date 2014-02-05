@@ -24,7 +24,8 @@ SOURCES += \
     src/worker.cpp \
     src/clipboard.cpp \
     src/main.cpp \
-    src/covermodel.cpp
+    src/covermodel.cpp \
+    src/util.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -68,7 +69,8 @@ HEADERS += \
     src/fileprocess.h \
     src/worker.h \
     src/clipboard.h \
-    src/covermodel.h
+    src/covermodel.h \
+    src/util.h
 
 RESOURCES += \
     resources.qrc

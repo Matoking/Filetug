@@ -42,6 +42,7 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
         fileDetails.insert("Size", bytesToString(fileInfo.size()));
         fileDetails.insert("Last modified", fileInfo.lastModified().toString());
         fileDetails.insert("Created", fileInfo.created().toString());
+        fileDetails.insert("Permissions", Util::getPermissionString(fileInfo.permissions()));
 
         detailEntries.insert("File details", fileDetails);
     }
@@ -50,6 +51,7 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
         // Add directory details
         fileDetails.insert("Last modified", fileInfo.lastModified().toString());
         fileDetails.insert("Created", fileInfo.created().toString());
+        fileDetails.insert("Permissions", Util::getPermissionString(fileInfo.permissions()));
 
         detailEntries.insert("Directory details", fileDetails);
     }

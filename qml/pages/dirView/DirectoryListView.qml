@@ -108,14 +108,50 @@ SilicaListView {
 
             Text {
                 anchors.left: image.right
-                anchors.leftMargin: 5
+                anchors.leftMargin: Theme.paddingSmall
                 anchors.top: fileNameLabel.bottom
                 anchors.topMargin: 2
 
                 font.pixelSize: Theme.fontSizeExtraSmall
                 color: Theme.secondaryColor
 
-                text: model.fileType != "directory" ? fileInfo.bytesToString(model.fileSize) : ""
+                text: model.fileType != "directory" ? fileInfo.bytesToString(model.fileSize) : "directory"
+            }
+
+            Text {
+                anchors.left: image.right
+                anchors.leftMargin: Theme.paddingSmall
+                anchors.right: parent.right
+                anchors.rightMargin: Theme.paddingMedium
+                anchors.top: fileNameLabel.bottom
+                anchors.topMargin: 2
+
+                horizontalAlignment: Text.AlignHCenter
+
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+
+                text: ""
+
+                Component.onCompleted: text = fileList.getFilePermissions(model.fullPath)
+            }
+
+            Text {
+                anchors.left: image.right
+                anchors.leftMargin: Theme.paddingSmall
+                anchors.right: parent.right
+                anchors.rightMargin: Theme.paddingMedium
+                anchors.top: fileNameLabel.bottom
+                anchors.topMargin: 2
+
+                horizontalAlignment: Text.AlignRight
+
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+
+                text: ""
+
+                Component.onCompleted: text = fileList.getLastModified(model.fullPath)
             }
 
             onClicked: {
@@ -154,6 +190,8 @@ SilicaListView {
                     iconButton.down = false
                 }
             }
+
+
         }
     }
 

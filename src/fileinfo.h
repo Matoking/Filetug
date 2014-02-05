@@ -9,6 +9,8 @@
 #include <QDateTime>
 #include <QDir>
 
+#include "util.h"
+
 class FileInfo : public QObject
 {
     Q_OBJECT

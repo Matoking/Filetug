@@ -185,7 +185,7 @@ Page {
         pullDownObject.updateView()
 
         var dirPushUpMenu = Qt.createComponent(Qt.resolvedUrl("dirView/DirectoryPushUpMenu.qml"))
-        dirPushUpMenu.createObject(newDir)
+        var dirPushUpObject = dirPushUpMenu.createObject(newDir)
 
         var dirPageHeader = Qt.createComponent(Qt.resolvedUrl("dirView/DirectoryPageHeader.qml"))
         var dirPageHeaderObject = dirPageHeader.createObject(newDir)

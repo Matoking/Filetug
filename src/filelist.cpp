@@ -242,6 +242,60 @@ bool FileList::containsFileType(const QString &fileType)
     return m_currentDirFileTypes.contains(fileType);
 }
 
+/*
+ *  Get file permissions for a file as a string
+ */
+QString FileList::getFilePermissions(QString fullPath)
+{
+    if (m_permissionMap.contains(fullPath))
+        return m_permissionMap.value(fullPath);
+    else
+    {
+        QFileInfo fileInfo(fullPath);
+
+        QString permissionString = Util::getPermissionString(fileInfo.permissions());
+        m_permissionMap.insert(fullPath, permissionString);
+
+        return permissionString;
+    }
+}
+
+/*
+ *  Get the last modification date for a file
+ */
+QString FileList::getLastModified(QString fullPath)
+{
+    if (m_lastModifiedMap.contains(fullPath))
+        return m_lastModifiedMap.value(fullPath);
+    else
+    {
+        QFileInfo fileInfo(fullPath);
+
+        // Use day/month/year format because it makes more sense and anyone who's willing to tell
+        // otherwise is wrong
+
+        // Show only time if the file was modified on the same day
+        bool sameDay = false;
+
+        QDate currentDate = QDate::currentDate();
+
+        if (currentDate.dayOfYear() == fileInfo.lastModified().date().dayOfYear() &&
+            currentDate.year() == fileInfo.lastModified().date().year())
+            sameDay = true;
+
+        QString modifiedString;
+
+        if (sameDay)
+            modifiedString = fileInfo.lastModified().toString("hh:mm");
+        else
+            modifiedString = fileInfo.lastModified().toString("dd/MM/yyyy");
+
+        m_lastModifiedMap.insert(fullPath, modifiedString);
+
+        return modifiedString;
+    }
+}
+
 void FileList::setShowHiddenFiles(const bool &showHiddenFiles)
 {
     m_showHiddenFiles = showHiddenFiles;
@@ -273,4 +327,7 @@ void FileList::resetFileInfoEntryList()
 {
     m_fileInfoEntryListMap.clear();
     m_currentDirFileTypes.clear();
+
+    m_permissionMap.clear();
+    m_lastModifiedMap.clear();
 }

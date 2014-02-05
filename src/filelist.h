@@ -7,9 +7,11 @@
 #include <QDir>
 #include <QFileInfoList>
 #include <QFileInfo>
+#include <QDateTime>
 #include <QDebug>
 
 #include "fileinfoentry.h"
+#include "util.h"
 
 class FileList : public QObject
 {
@@ -26,8 +28,15 @@ public:
 
     Q_INVOKABLE bool containsFileType(const QString &fileType);
 
+    Q_INVOKABLE QString getFilePermissions(QString fullPath);
+    Q_INVOKABLE QString getLastModified(QString fullPath);
+
     // What file types the current dir contains
     QStringList m_currentDirFileTypes;
+
+    // Permission and modification time lists to be used with list view
+    QMap<QString, QString> m_permissionMap;
+    QMap<QString, QString> m_lastModifiedMap;
 
     QString m_currentPath;
 
