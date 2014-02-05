@@ -7,6 +7,7 @@
 #include <QVariantMap>
 #include <QImage>
 #include <QDateTime>
+#include <QDir>
 
 class FileInfo : public QObject
 {

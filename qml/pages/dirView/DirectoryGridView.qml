@@ -74,7 +74,7 @@ SilicaGridView {
 
             onClicked: {
                 if (!selectingItems)
-                    DirectoryViewModel.openFile(model, directoryView)
+                    DirectoryViewModel.openFile(model)
                 else
                 {
                     if (model.fileName == "..")

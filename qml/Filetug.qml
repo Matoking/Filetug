@@ -52,6 +52,12 @@ ApplicationWindow
         return pageStack.find(function(page) { if ('isFilePage') { return true; } else return false; })
     }
 
+    // Get the current file view (eg. audio/video/image/text view)
+    property var getFileView: function() {
+        var page = getFilePage()
+        return page.currentView
+    }
+
     property bool selectingItems: false
 
     id: mainWindow

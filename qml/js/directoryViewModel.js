@@ -48,8 +48,10 @@ function updateFileList(fileModel, path)
 /*
  *  Opens the file
  */
-function openFile(entry, directoryView, fileType)
+function openFile(entry, fileType)
 {
+    var directoryPage = getDirectoryPage()
+
     fileType = typeof fileType !== 'undefined' ? fileType : entry.fileType
 
     console.log("File type " + entry.fileType)
@@ -82,11 +84,11 @@ function openFile(entry, directoryView, fileType)
 
         if (entry.fileName != "..")
         {
-            directoryView.openDirectory(entry.fullPath, "left")
+            directoryPage.openDirectory(entry.fullPath, "left")
         }
         else
         {
-            directoryView.openDirectory(entry.fullPath, "right")
+            directoryPage.openDirectory(entry.fullPath, "right")
         }
     }
 }

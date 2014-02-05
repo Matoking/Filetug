@@ -20,6 +20,11 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
     // Check if it's an image
     QImage image(fullPath);
 
+    // Check if it's a directory
+    QDir dir(fullPath);
+
+    bool isDir = dir.exists();
+
     if (!image.isNull())
     {
         QVariantMap imageDetails;
@@ -31,12 +36,19 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
         detailEntries.insert("Image details", imageDetails);
     }
 
-    // Add normal details
-    fileDetails.insert("Size", bytesToString(fileInfo.size()));
-    fileDetails.insert("Last modified", fileInfo.lastModified().toString());
-    fileDetails.insert("Created", fileInfo.created().toString());
+    if (!isDir)
+    {
+        // Add normal file details
+        fileDetails.insert("Size", bytesToString(fileInfo.size()));
+        fileDetails.insert("Last modified", fileInfo.lastModified().toString());
+        fileDetails.insert("Created", fileInfo.created().toString());
 
-    detailEntries.insert("File details", fileDetails);
+        detailEntries.insert("File details", fileDetails);
+    }
+    else
+    {
+        // Add directory details
+    }
 
     // Get file format name
     QString fileFormat = getFileFormatName(fileInfo.suffix());

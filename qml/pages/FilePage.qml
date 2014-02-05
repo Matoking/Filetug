@@ -11,6 +11,8 @@ Page {
 
     property int currentFileId: -1
 
+    property var currentView: null
+
     property bool overlayUiVisible: false
 
     // Don't allow the file properties page to be opened if one has already been opened somewhere
@@ -302,6 +304,8 @@ Page {
 
         var fileObject = fileView.createObject(fileRow, { "fileEntry": entry })
 
+        currentView = fileObject
+
         fileObject.onFileLoaded.connect(function() { busyIndicator.running = false })
 
         // Add a signal so we know when user taps on the screen
@@ -313,10 +317,15 @@ Page {
         coverModel.setCoverLabel(entry.fileName)
         // Make sure the thumbnail is displayed on the cover even if the object doesn't contain
         // the thumbnail path
-        coverModel.setIconSource("image://thumbnail/" + entry.fullPath)
-
-        // Disable back navigation if we are displaying an image
         if (entry.fileType == "image")
+            coverModel.setIconSource("image://thumbnail/" + entry.fullPath)
+        else if ('thumbnail' in entry)
+            coverModel.setIconSource(entry.thumbnail)
+        else
+            coverModel.setIconSource("image://icons/" + entry.fileType)
+
+        // Disable back navigation if we are displaying an image or a video
+        if (entry.fileType == "image" || entry.fileType == "video")
             backNavigation = false
         else
             backNavigation = true
@@ -406,6 +415,10 @@ Page {
         if (fileRow.children.length >= 2)
             return;
 
+        // Call the to-be-destroyed file page in case some cleanup procedure needs to be done
+        if ('destroyView' in fileRow.children[0])
+            fileRow.children[0].destroyView()
+
         var newFile = createFileObject(similarFileList[fileId])
 
         // Collapse the current directory
@@ -471,6 +484,9 @@ Page {
             nextArea.visible = true
         }
 
+        // Also call a function in the file view if it exists
+        if ('showOverlayUi' in currentView)
+            currentView.showOverlayUi()
     }
 
     /*
@@ -479,5 +495,9 @@ Page {
     function hideOverlayUi()
     {
         overlayUiVisible = false
+
+        // Also call a function in the file view if it exists
+        if ('hideOverlayUi' in currentView)
+            currentView.hideOverlayUi()
     }
 }
