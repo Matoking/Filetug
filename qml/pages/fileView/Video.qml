@@ -3,6 +3,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Media 1.0
 import QtMultimedia 5.0
+import org.nemomobile.thumbnailer 1.0
 
 Flickable {
     id: fileView
@@ -17,6 +18,22 @@ Flickable {
 
     width: parent.width
     height: parent.height
+
+    Thumbnail {
+        id: videoThumbnail
+
+        fillMode: Thumbnail.PreserveAspectFit
+
+        opacity: video.playbackState == MediaPlayer.StoppedState ? 1 : 0
+
+        sourceSize.height: Screen.height
+        sourceSize.width: Screen.height
+
+        width: parent.width
+        height: parent.height
+
+        source: video.source
+    }
 
     MediaPlayer {
         id: video
@@ -47,6 +64,10 @@ Flickable {
         }
     }
 
+    ScreenBlank {
+        suspend: video.playbackState == MediaPlayer.PlayingState
+    }
+
     MouseArea {
         anchors.fill: parent
 
@@ -57,8 +78,8 @@ Flickable {
 
             anchors.centerIn: parent
 
-            width: Theme.itemSizeLarge
-            height: Theme.itemSizeLarge
+            width: Theme.itemSizeLarge * 2
+            height: Theme.itemSizeLarge * 2
 
             Image {
                 anchors.centerIn: parent
