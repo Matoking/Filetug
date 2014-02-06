@@ -2,7 +2,6 @@
 
 QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
-    qDebug(id.toLatin1());
     QFileInfo fileInfo(id);
 
     // Check that the file is actually an image before creating a directory
@@ -23,14 +22,13 @@ QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSi
 
     if (thumbnailImage.isNull())
     {
-        qDebug() << "Generating thumbnail for " << id.toLatin1();
         // Thumbnail not generated, generate it
         QImage originalImage(fileInfo.absoluteFilePath());
 
         int requestedHeight = requestedSize.height() == -1 ? 120 : requestedSize.height();
         int requestedWidth = requestedSize.width() == -1 ? 120 : requestedSize.width();
 
-        originalImage = originalImage.scaled(requestedHeight, requestedWidth, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        originalImage = originalImage.scaled(requestedHeight, requestedWidth, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
 
         // Save it
         qDebug() << thumbnailPath.toLatin1();

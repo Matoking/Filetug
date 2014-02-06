@@ -92,8 +92,11 @@ SilicaGridView {
             onPressAndHold: {
                 if (!selectingItems)
                 {
-                    getDirectoryPage().selectFiles(true)
-                    clipboard.addFileToSelectedFiles(model.fullPath)
+                    if (!dragActive)
+                    {
+                        getDirectoryPage().selectFiles(true)
+                        clipboard.addFileToSelectedFiles(model.fullPath)
+                    }
 
                     iconButton.down = true
                 }

@@ -68,6 +68,15 @@ Page {
         anchors.fill: parent
     }
 
+    Label {
+        id: goBackLabel
+        anchors.centerIn: parent
+
+        text: "Go back"
+
+        opacity: 0
+    }
+
     Connections {
         target: settings
         onDirectoryViewSettingsChanged: {
