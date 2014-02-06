@@ -17,6 +17,7 @@ PkgConfigBR:
 - Qt5Qml
 - Qt5Quick
 Requires:
+- qt5-qtsvg-plugin-imageformat-svg >= 0-1.2.2
 - sailfishsilica-qt5 >= 0.10.9
 Files:
 - /usr/share/harbour-filetug

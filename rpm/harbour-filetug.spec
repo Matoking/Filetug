@@ -20,6 +20,7 @@ License:    Unlicense <http://unlicense.org/>
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-filetug.yaml
+Requires:   qt5-qtsvg-plugin-imageformat-svg >= 0-1.2.2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  pkgconfig(Qt5Core)
