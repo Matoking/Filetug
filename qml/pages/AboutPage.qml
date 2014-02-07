@@ -32,7 +32,7 @@ Page {
                 Label {
                     width: parent.width
 
-                    text: "v. 0.1-4"
+                    text: "v. 0.1-5"
 
                     font.pixelSize: Theme.fontSizeSmall
 

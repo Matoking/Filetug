@@ -92,7 +92,7 @@ Page {
                         sourceSize.width: width
                         sourceSize.height: width
 
-                        source: fileEntry.fileType == "image" ? fileEntry.fullPath : fileEntry.thumbnail
+                        source: 'thumbnail' in fileEntry ? fileEntry.thumbnail : "image://icons/" + fileEntry.fileType
                     }
 
                     Label {
@@ -337,7 +337,7 @@ Page {
                                          "fullPath": fileEntry.fullPath,
                                          "fileType": "text",
                                          "path": fileEntry.path }
-                    DirectoryViewModel.openFile(newFileEntry, getDirectoryView(), "text")
+                    DirectoryViewModel.openFile(newFileEntry, "text")
                     break;
             }
         }
