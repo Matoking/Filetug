@@ -89,6 +89,19 @@ QString Settings::getDirPath() const
 }
 
 /*
+ *  Go up in the directory hierarchy
+ */
+void Settings::cdUp()
+{
+    QDir dir(getDirPath());
+
+    bool success = dir.cdUp();
+
+    if (success)
+        setDirPath(dir.absolutePath());
+}
+
+/*
  *  defaultViewMode - default view mode when viewing directories
  */
 void Settings::setDefaultViewMode(const QString &defaultViewMode)

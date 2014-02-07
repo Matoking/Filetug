@@ -103,6 +103,7 @@ QString FileInfo::getFileFormatName(QString suffix)
     formatNames.insert("3gp", "3GP video");
     formatNames.insert("mp4", "MP4 video");
     formatNames.insert("mkv", "MKV video");
+    formatNames.insert("wmv", "WMV video");
 
     formatNames.insert("mp3", "MP3 audio");
     formatNames.insert("ogg", "OGG audio");

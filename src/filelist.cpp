@@ -13,7 +13,7 @@ FileList::FileList(QObject *parent) :
     imageFormats << "image" << "png" << "jpg" << "jpeg" << "gif" << "svg";
 
     QStringList videoFormats;
-    videoFormats << "video" << "mpg" << "avi" << "mov" << "3gp" << "mp4" << "mkv";
+    videoFormats << "video" << "mpg" << "avi" << "mov" << "3gp" << "mp4" << "mkv" << "wmv";
 
     QStringList audioFormats;
     audioFormats << "audio" << "mp3" << "ogg" << "wav";

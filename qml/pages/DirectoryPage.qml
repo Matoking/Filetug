@@ -11,6 +11,10 @@ Page {
 
     property var currentView: null
 
+    showNavigationIndicator: false
+
+    backNavigation: settings.dirPath == "/" ? false : true
+
     /*PageHeader {
         id: pageHeader
         title: ""
@@ -104,6 +108,13 @@ Page {
 
     onPageContainerChanged: openDirectory(settings.dirPath)
 
+    onStatusChanged: {
+        if (status == PageStatus.Deactivating) {
+            // Change in progress, change the settings dir path
+            settings.cdUp()
+        }
+    }
+
     /*
      *  Open a directory
      */
@@ -187,17 +198,6 @@ Page {
                 newDir.collapseToRight(false)
             }
         }
-
-        // Add PushUpMenu and PullDownMenu objects
-        var dirPullDownMenu = Qt.createComponent(Qt.resolvedUrl("dirView/DirectoryPullDownMenu.qml"))
-        var pullDownObject = dirPullDownMenu.createObject(newDir)
-        pullDownObject.updateView()
-
-        var dirPushUpMenu = Qt.createComponent(Qt.resolvedUrl("dirView/DirectoryPushUpMenu.qml"))
-        var dirPushUpObject = dirPushUpMenu.createObject(newDir)
-
-        var dirPageHeader = Qt.createComponent(Qt.resolvedUrl("dirView/DirectoryPageHeader.qml"))
-        var dirPageHeaderObject = dirPageHeader.createObject(newDir)
 
         getDirectoryView().scrollToTop()
     }

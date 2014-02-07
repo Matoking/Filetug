@@ -21,6 +21,9 @@ SilicaListView {
 
     VerticalScrollDecorator { }
 
+    DirectoryPullDownMenu {  }
+    DirectoryPushUpMenu {  }
+
     // Directory title header
     header: Item {
         anchors.left: parent.left

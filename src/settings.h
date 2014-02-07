@@ -5,6 +5,7 @@
 #include <QString>
 #include <QDebug>
 #include <QSettings>
+#include <QDir>
 
 class Settings : public QObject
 {
@@ -35,6 +36,8 @@ public:
     // dirPath
     void setDirPath(const QString &dirPath);
     QString getDirPath() const;
+
+    Q_INVOKABLE void cdUp();
 
     // defaultViewMode
     void setDefaultViewMode(const QString &defaultViewMode);

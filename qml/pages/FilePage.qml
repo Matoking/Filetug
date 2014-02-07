@@ -326,9 +326,9 @@ Page {
 
         // Disable back navigation if we are displaying an image or a video
         if (entry.fileType == "image" || entry.fileType == "video")
-            backNavigation = false
+            showNavigationIndicator = false
         else
-            backNavigation = true
+            showNavigationIndicator = true
 
         var fileIndex = engine.updateCurrentFileIndex(entry.fullPath,
                                                       entry.path,
@@ -468,7 +468,7 @@ Page {
         overlayUiVisible = true
         overlayTimer.restart()
 
-        if (backNavigation)
+        if (showNavigationIndicator)
             backArea.visible = false
         else
             backArea.visible = true

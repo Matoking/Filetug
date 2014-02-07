@@ -23,6 +23,9 @@ SilicaGridView {
 
     VerticalScrollDecorator { }
 
+    DirectoryPullDownMenu {  }
+    DirectoryPushUpMenu {  }
+
     // Directory title header
     header: Item {
         anchors.left: parent.left
@@ -92,11 +95,8 @@ SilicaGridView {
             onPressAndHold: {
                 if (!selectingItems)
                 {
-                    if (!dragActive)
-                    {
-                        getDirectoryPage().selectFiles(true)
-                        clipboard.addFileToSelectedFiles(model.fullPath)
-                    }
+                    getDirectoryPage().selectFiles(true)
+                    clipboard.addFileToSelectedFiles(model.fullPath)
 
                     iconButton.down = true
                 }
