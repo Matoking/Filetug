@@ -49,7 +49,7 @@ ApplicationWindow
 
     // Get the current file page
     property var getFilePage: function() {
-        return pageStack.find(function(page) { if ('isFilePage') { return true; } else return false; })
+        return pageStack.find(function(page) { if ('isFilePage' in page) { return true; } else return false; })
     }
 
     // Get the current file view (eg. audio/video/image/text view)

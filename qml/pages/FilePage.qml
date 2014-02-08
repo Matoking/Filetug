@@ -6,6 +6,8 @@ Page {
 
     allowedOrientations: Orientation.All
 
+    property var isFilePage: true
+
     property var fileEntry: { "imageType": null }
     property var displayMode: null
 

@@ -5,6 +5,8 @@ import Sailfish.Silica 1.0
 Page {
     id: page
 
+    allowedOrientations: Orientation.All
+
     onStatusChanged: {
         if (status == PageStatus.Active) pageStack.push(Qt.resolvedUrl("DirectoryPage.qml"), null, PageStackAction.Immediate)
     }
