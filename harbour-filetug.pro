@@ -57,7 +57,8 @@ OTHER_FILES += \
     qml/pages/settings/FileDisplay.qml \
     qml/Filetug.qml \
     qml/pages/DirectoryPage.qml \
-    qml/pages/BackPage.qml
+    qml/pages/BackPage.qml \
+    qml/pages/dirView/DirectoryFileOperations.qml
 
 HEADERS += \
     src/thumbnailprovider.h \

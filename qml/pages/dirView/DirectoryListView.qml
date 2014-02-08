@@ -19,6 +19,24 @@ SilicaListView {
 
     currentIndex: engine.currentFileIndex
 
+    onVerticalVelocityChanged: {
+        if (verticalVelocity > (Theme.startDragDistance / 5) && flicking)
+        {
+            getDirectoryPage().showScrollToBottom(true)
+            getDirectoryPage().showScrollToTop(false)
+        }
+        else if (verticalVelocity < 0 - (Theme.startDragDistance / 5) && flicking)
+        {
+            getDirectoryPage().showScrollToTop(true)
+            getDirectoryPage().showScrollToBottom(false)
+        }
+        else
+        {
+            getDirectoryPage().showScrollToTop(false)
+            getDirectoryPage().showScrollToBottom(false)
+        }
+    }
+
     VerticalScrollDecorator { }
 
     DirectoryPullDownMenu {  }
@@ -29,13 +47,20 @@ SilicaListView {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        height: Theme.itemSizeLarge
+        height: Theme.itemSizeLarge + fileOperationsView.height
+
+        DirectoryFileOperations {
+            id: fileOperationsView
+
+            Component.onCompleted: fileOperationsView.updateView()
+        }
 
         Label {
             id: headerLabel
 
             text: settings.dirPath
 
+            anchors.top: fileOperationsView.bottom
             anchors.left: parent.left
             anchors.leftMargin: Theme.paddingMedium
             anchors.right: parent.right

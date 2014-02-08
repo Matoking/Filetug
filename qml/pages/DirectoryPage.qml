@@ -15,53 +15,6 @@ Page {
 
     backNavigation: settings.dirPath == "/" ? false : true
 
-    /*PageHeader {
-        id: pageHeader
-        title: ""
-        Label {
-            id: pageHeaderText
-
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width / 15
-            anchors.right: parent.right
-            anchors.rightMargin: parent.width / 15
-
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            text: settings.dirPath
-
-            color: Theme.primaryColor
-        }
-    }*/
-
-    /*SilicaFlickable {
-
-    PullDownMenu {
-        id: pullDownMenu
-
-        MenuItem {
-            text: "Settings"
-            onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-        MenuItem {
-            text: "Scroll to bottom"
-            onClicked: directoryView.scrollToBottom()
-        }
-
-    }
-
-    PushUpMenu {
-        id: pushUpMenu
-
-        MenuItem {
-            text: "Scroll to top"
-            onClicked: directoryView.scrollToTop()
-        }
-    }
-    }*/
-
     VerticalScrollDecorator { }
 
     RemorsePopup { id: remorsePopup }
@@ -69,16 +22,81 @@ Page {
     Row {
         id: directoryListRow
 
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
-    Label {
-        id: goBackLabel
-        anchors.centerIn: parent
+    /*DockedPanel {
+        id: progressPanel
 
-        text: "Go back"
+        width: parent.width
+        height: Theme.itemSizeExtraLarge + Theme.paddingLarge
 
-        opacity: 0
+        dock: Dock.Top
+
+        open: true
+
+        ProgressCircle {
+            id: progressCircle
+
+            anchors.centerIn: parent
+
+            NumberAnimation on value {
+                from: 0
+                to: 1
+                duration: 1000
+                running: progressPanel.expanded
+                loops: Animation.Infinite
+            }
+        }
+    }*/
+
+    BackgroundItem {
+        id: scrollToTopButton
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        width: parent.width
+        height: Theme.itemSizeLarge
+
+        visible: false
+
+        Image {
+            source: "image://theme/icon-l-up"
+
+            visible: scrollToTopButton.visible
+
+            anchors.centerIn: parent
+        }
+
+        onClicked: if (visible) getDirectoryView().scrollToTop()
+    }
+
+    BackgroundItem {
+        id: scrollToBottomButton
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        width: parent.width
+        height: Theme.itemSizeLarge
+
+        visible: false
+
+        Image {
+            source: "image://theme/icon-l-down"
+
+            visible: scrollToBottomButton.visible
+
+            anchors.centerIn: parent
+        }
+
+        onClicked: if (visible) getDirectoryView().scrollToBottom()
     }
 
     Connections {
@@ -269,5 +287,18 @@ Page {
         selectingItems = start
 
         clipboard.clearSelectedFiles()
+    }
+
+    /*
+     *  Show the "scroll to top" button
+     */
+    function showScrollToTop(show)
+    {
+        scrollToTopButton.visible = show
+    }
+
+    function showScrollToBottom(show)
+    {
+        scrollToBottomButton.visible = show
     }
 }
