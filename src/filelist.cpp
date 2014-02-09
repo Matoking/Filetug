@@ -245,8 +245,11 @@ bool FileList::containsFileType(const QString &fileType)
 /*
  *  Get file permissions for a file as a string
  */
-QString FileList::getFilePermissions(QString fullPath)
+QString FileList::getFilePermissions(QString fullPath, bool update)
 {
+    if (update && m_permissionMap.contains(fullPath))
+        m_permissionMap.remove(fullPath);
+
     if (m_permissionMap.contains(fullPath))
         return m_permissionMap.value(fullPath);
     else

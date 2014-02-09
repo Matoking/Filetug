@@ -37,6 +37,8 @@ public:
 
     Q_INVOKABLE void copyToClipboard(const QString &string);
 
+    Q_INVOKABLE bool changeFilePermission(QString fullPath, int permissionPos);
+
     void setCurrentFileIndex(const int &currentFileIndex);
     int getCurrentFileIndex() const;
 

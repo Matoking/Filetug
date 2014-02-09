@@ -23,207 +23,219 @@ Page {
 
     allowedOrientations: Orientation.All
 
-    SilicaListView {
-        id: listView
+    SilicaFlickable {
         anchors.fill: parent
 
-        width: parent.width
-        height: parent.height
+        SilicaListView {
+            id: listView
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        model: listModel
+            width: parent.width
+            height: parent.height
 
-        header: Item {
+            model: listModel
+
+            header: Item {
+                        width: parent.width
+                        height: childrenRect.height
+
+                        PageHeader {
+                            id: pageHeader
+                            title: "File information"
+                        }
+
+                        ProgressBar {
+                            id: progressBar
+                            indeterminate: progressIndeterminate
+                            value: progress
+
+                            anchors.top: pageHeader.bottom
+
+                            minimumValue: 0
+                            maximumValue: 1
+
+                            visible: progressBarVisible
+
+                            label: progressText
+
+                            width: parent.width
+                        }
+                        Text {
+                            id: actionLabel
+
+                            anchors.top: pageHeader.bottom
+                            anchors.topMargin: progressBar.height / 2
+
+                            text: progressText
+
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.secondaryColor
+
+                            horizontalAlignment: Text.AlignHCenter
+
+                            visible: actionLabelVisible
+
+                            width: parent.width
+                        }
+
+                        Image {
+                            id: fileImage
+
+                            anchors.top: progressBarVisible == true || actionLabelVisible == true ? progressBar.bottom : pageHeader.bottom
+                            anchors.topMargin: Theme.paddingMedium
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+
+                            anchors.horizontalCenter: parent
+
+                            fillMode: Image.PreserveAspectFit
+
+                            height: Screen.height / 4
+
+                            sourceSize.width: width
+                            sourceSize.height: width
+
+                            source: 'thumbnail' in fileEntry ? fileEntry.thumbnail : "image://icons/" + fileEntry.fileType
+                        }
+
+                        Label {
+                            id: fileNameLabel
+
+                            anchors.top: fileImage.bottom
+
+                            horizontalAlignment: Text.AlignHCenter
+                            wrapMode: Text.Wrap
+
+                            width: parent.width
+
+                            text: fileEntry.fileName
+                        }
+                        Label {
+                            id: fileFormatLabel
+
+                            anchors.top: fileNameLabel.bottom
+
+                            horizontalAlignment: Text.AlignHCenter
+                            wrapMode: Text.Wrap
+                            color: Theme.secondaryColor
+
+                            width: parent.width
+
+                            text: fileFormat
+                        }
+
+                }
+
+            PullDownMenu {
+                id: pullDownMenu
+
+                Repeater {
+                    model: pullDownModel
+                    MenuItem {
+                        text: model.label
+                        onClicked: performFileAction(model.action, model.track, model.process)
+                    }
+                }
+            }
+
+            ListModel {
+                id: pullDownModel
+            }
+
+            ListModel {
+                id: listModel
+            }
+
+            VerticalScrollDecorator {}
+
+            section {
+                property: 'section'
+
+                delegate: SectionHeader {
+                    text: section
+                    height: Theme.itemSizeExtraSmall
+                }
+            }
+
+            /*Column {
+                id: column
+                spacing: Theme.paddingLarge
+                width: parent.width
+                PageHeader {
+                    title: "File information"
+                }
+
+                Column {
                     width: parent.width
-                    height: childrenRect.height
-
-                    PageHeader {
-                        id: pageHeader
-                        title: "File information"
-                    }
-
-                    ProgressBar {
-                        id: progressBar
-                        indeterminate: progressIndeterminate
-                        value: progress
-
-                        anchors.top: pageHeader.bottom
-
-                        minimumValue: 0
-                        maximumValue: 1
-
-                        visible: progressBarVisible
-
-                        label: progressText
-
-                        width: parent.width
-                    }
-                    Text {
-                        id: actionLabel
-
-                        anchors.top: pageHeader.bottom
-                        anchors.topMargin: progressBar.height / 2
-
-                        text: progressText
-
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.secondaryColor
-
-                        horizontalAlignment: Text.AlignHCenter
-
-                        visible: actionLabelVisible
-
-                        width: parent.width
-                    }
-
-                    Image {
-                        id: fileImage
-
-                        anchors.top: progressBarVisible == true || actionLabelVisible == true ? progressBar.bottom : pageHeader.bottom
-                        anchors.topMargin: Theme.paddingMedium
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-
-                        anchors.horizontalCenter: parent
-
-                        fillMode: Image.PreserveAspectFit
-
-                        height: Screen.height / 4
-
-                        sourceSize.width: width
-                        sourceSize.height: width
-
-                        source: 'thumbnail' in fileEntry ? fileEntry.thumbnail : "image://icons/" + fileEntry.fileType
-                    }
 
                     Label {
-                        id: fileNameLabel
+                        width: parent.width
 
-                        anchors.top: fileImage.bottom
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: Theme.paddingLarge
+                        anchors.rightMargin: Theme.paddingLarge
 
                         horizontalAlignment: Text.AlignHCenter
-                        wrapMode: Text.Wrap
-
-                        width: parent.width
 
                         text: fileEntry.fileName
                     }
+
                     Label {
-                        id: fileFormatLabel
-
-                        anchors.top: fileNameLabel.bottom
-
-                        horizontalAlignment: Text.AlignHCenter
-                        wrapMode: Text.Wrap
-                        color: Theme.secondaryColor
-
                         width: parent.width
 
-                        text: fileFormat
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: Theme.paddingLarge
+                        anchors.rightMargin: Theme.paddingLarge
+
+                        horizontalAlignment: Text.AlignHCenter
+
+                        color: Theme.secondaryColor
+
+                        text: "File type here bitch"
                     }
-
-            }
-
-        PullDownMenu {
-            id: pullDownMenu
-
-            Repeater {
-                model: pullDownModel
-                MenuItem {
-                    text: model.label
-                    onClicked: performFileAction(model.action, model.track, model.process)
                 }
-            }
-        }
+            }*/
 
-        ListModel {
-            id: pullDownModel
-        }
-
-        ListModel {
-            id: listModel
-        }
-
-        VerticalScrollDecorator {}
-
-        section {
-            property: 'section'
-
-            delegate: SectionHeader {
-                text: section
-                height: Theme.itemSizeExtraSmall
-            }
-        }
-
-        /*Column {
-            id: column
-            spacing: Theme.paddingLarge
-            width: parent.width
-            PageHeader {
-                title: "File information"
-            }
-
-            Column {
+            delegate: Item {
                 width: parent.width
+                height: detailValueLabel.paintedHeight + Theme.paddingSmall
 
-                Label {
-                    width: parent.width
+                Text {
+                    id: detailLabel
+                    width: (parent.width / 2) - Theme.paddingMedium
 
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Theme.paddingLarge
-                    anchors.rightMargin: Theme.paddingLarge
-
-                    horizontalAlignment: Text.AlignHCenter
-
-                    text: fileEntry.fileName
-                }
-
-                Label {
-                    width: parent.width
-
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Theme.paddingLarge
-                    anchors.rightMargin: Theme.paddingLarge
-
-                    horizontalAlignment: Text.AlignHCenter
+                    horizontalAlignment: Text.AlignRight
 
                     color: Theme.secondaryColor
+                    font.pixelSize: Theme.fontSizeSmall
 
-                    text: "File type here bitch"
+                    text: model.detailTitle
+                }
+
+                Text {
+                    id: detailValueLabel
+                    x: (parent.width / 2) + Theme.paddingMedium
+                    width: (parent.width / 2) - Theme.paddingMedium
+
+                    horizontalAlignment: Text.AlignLeft
+
+                    wrapMode: Text.Wrap
+
+                    color: Theme.primaryColor
+                    font.pixelSize: Theme.fontSizeSmall
+
+                    text: model.detailValue
                 }
             }
-        }*/
 
-        delegate: Item {
-            width: parent.width
-            height: detailValueLabel.paintedHeight + Theme.paddingSmall
+            footer: PermissionEdit {
+                id: permissionEdit
 
-            Text {
-                id: detailLabel
-                width: (parent.width / 2) - Theme.paddingMedium
-
-                horizontalAlignment: Text.AlignRight
-
-                color: Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeSmall
-
-                text: model.detailTitle
-            }
-
-            Text {
-                id: detailValueLabel
-                x: (parent.width / 2) + Theme.paddingMedium
-                width: (parent.width / 2) - Theme.paddingMedium
-
-                horizontalAlignment: Text.AlignLeft
-
-                wrapMode: Text.Wrap
-
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeSmall
-
-                text: model.detailValue
+                Component.onCompleted: permissionEdit.fullPath = fileEntry.fullPath
             }
         }
     }

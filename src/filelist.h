@@ -28,7 +28,7 @@ public:
 
     Q_INVOKABLE bool containsFileType(const QString &fileType);
 
-    Q_INVOKABLE QString getFilePermissions(QString fullPath);
+    Q_INVOKABLE QString getFilePermissions(QString fullPath, bool update = false);
     Q_INVOKABLE QString getLastModified(QString fullPath);
 
     // What file types the current dir contains

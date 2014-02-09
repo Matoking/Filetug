@@ -156,6 +156,60 @@ void FileEngine::copyToClipboard(const QString &string)
 }
 
 /*
+ *  Change a single file permission in a file
+ */
+bool FileEngine::changeFilePermission(QString fullPath, int permissionPos)
+{
+    QFile file(fullPath);
+
+    QFileDevice::Permissions filePermissions = file.permissions();
+
+    switch (permissionPos)
+    {
+        case 0:
+            if (filePermissions & QFileDevice::ReadUser) filePermissions = filePermissions & ~QFileDevice::ReadUser;
+            else filePermissions = filePermissions | QFileDevice::ReadUser;
+            break;
+        case 1:
+            if (filePermissions & QFileDevice::WriteUser) filePermissions = filePermissions & ~QFileDevice::WriteUser;
+            else filePermissions = filePermissions | QFileDevice::WriteUser;
+            break;
+        case 2:
+            if (filePermissions & QFileDevice::ExeUser) filePermissions = filePermissions & ~QFileDevice::ExeUser;
+            else filePermissions = filePermissions | QFileDevice::ExeUser;
+            break;
+        case 3:
+            if (filePermissions & QFileDevice::ReadGroup) filePermissions = filePermissions & ~QFileDevice::ReadGroup;
+            else filePermissions = filePermissions | QFileDevice::ReadGroup;
+            break;
+        case 4:
+            if (filePermissions & QFileDevice::WriteGroup) filePermissions = filePermissions & ~QFileDevice::WriteGroup;
+            else filePermissions = filePermissions | QFileDevice::WriteGroup;
+            break;
+        case 5:
+            if (filePermissions & QFileDevice::ExeGroup) filePermissions = filePermissions & ~QFileDevice::ExeGroup;
+            else filePermissions = filePermissions | QFileDevice::ExeGroup;
+            break;
+        case 6:
+            if (filePermissions & QFileDevice::ReadOwner) filePermissions = filePermissions & ~QFileDevice::ReadOwner;
+            else filePermissions = filePermissions | QFileDevice::ReadOwner;
+            break;
+        case 7:
+            if (filePermissions & QFileDevice::WriteOwner) filePermissions = filePermissions & ~QFileDevice::WriteOwner;
+            else filePermissions = filePermissions | QFileDevice::WriteOwner;
+            break;
+        case 8:
+            if (filePermissions & QFileDevice::ExeOwner) filePermissions = filePermissions & ~QFileDevice::ExeOwner;
+            else filePermissions = filePermissions | QFileDevice::ExeOwner;
+            break;
+    }
+
+    bool success = file.setPermissions(filePermissions);
+
+    return success;
+}
+
+/*
  *  currentFileIndex - the file index for the currently opened item
  */
 void FileEngine::setCurrentFileIndex(const int &currentFileIndex)
