@@ -7,6 +7,8 @@ Page {
     property string fileOperation: ""
     property string clipboardDir: ""
 
+    property bool isFileOperationPage: true
+
     property var clipboard: [ ]
     property var selectedFiles: [ ]
     property string directory: ""
@@ -65,6 +67,8 @@ Page {
     Connections {
         target: engine
         onFileOperationFinished: {
+            progressBar.indeterminate = false
+            progressBar.value = 1
             backNavigation = true
         }
         onCurrentEntryChanged: {

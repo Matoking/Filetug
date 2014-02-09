@@ -193,7 +193,17 @@ SilicaListView {
                     if (!iconButton.down)
                         clipboard.addFileToSelectedFiles(model.fullPath)
                     else
+                    {
                         clipboard.removeFileFromSelectedFiles(model.fullPath)
+
+                        if (clipboard.getSelectedFileCount() == 0)
+                        {
+                            getDirectoryPage().selectFiles(false)
+                            iconButton.down = false
+                            return
+                        }
+
+                    }
 
                     iconButton.down = !iconButton.down
                 }

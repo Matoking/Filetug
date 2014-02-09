@@ -80,11 +80,13 @@ void FileEngine::performFileOperation(const QString &fileOperation,
 
     connect(worker, SIGNAL(fileOperationFinished()), this, SIGNAL(fileOperationFinished()));
 
-    qDebug() << "Woah " << clipboardList.length();
-
     if (fileOperation == "paste")
     {
-        worker->startPasteProcess(clipboardList, directory, clipboardDir);
+        bool cut = false;
+        if (clipboard->getFileOperation() == "cut")
+            cut = true;
+
+        worker->startPasteProcess(clipboardList, directory, clipboardDir, cut);
     }
     else if (fileOperation == "delete")
     {

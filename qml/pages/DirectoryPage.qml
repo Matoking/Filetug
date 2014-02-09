@@ -126,14 +126,6 @@ Page {
 
     onPageContainerChanged: openDirectory(settings.dirPath)
 
-    onStatusChanged: {
-        console.log(getFilePage())
-        if (status == PageStatus.Deactivating && !getFilePage()) {
-            // Change in progress, change the settings dir path
-            settings.cdUp()
-        }
-    }
-
     /*
      *  Open a directory
      */

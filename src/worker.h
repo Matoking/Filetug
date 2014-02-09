@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QVariantMap>
+#include <QTime>
 
 class Worker : public QThread
 {
@@ -24,7 +25,7 @@ public:
     void clearFileLists();
 
 public slots:
-    void startPasteProcess(QStringList entryList, QString destination, QString clipboardDir);
+    void startPasteProcess(QStringList entryList, QString destination, QString clipboardDir, bool cut);
     void startDeleteProcess(QStringList entryList);
 
 signals:
@@ -39,7 +40,7 @@ protected:
 
 private:
     enum FileOperation {
-        None, Delete, Paste
+        None, Delete, Paste, CutPaste
     };
 
     enum DirError {

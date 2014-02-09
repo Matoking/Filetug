@@ -20,51 +20,10 @@ PullDownMenu {
         text: "New..."
         onClicked: getDirectoryPage().addNewFiles()
     }
-    MenuItem {
-        id: selectFilesItem
-        text: "Select files"
-        onClicked: {
-            stopSelectingFilesItem.visible = true
-            visible = false
-            getDirectoryPage().selectFiles(true)
-        }
-    }
-    MenuItem {
-        id: stopSelectingFilesItem
-        text: "Stop selecting files"
-        visible: false
-        onClicked: stopSelectingItems()
-
-        function stopSelectingItems()
-        {
-            selectFilesItem.visible = true
-            visible = false
-            getDirectoryPage().selectFiles(false)
-        }
-    }
 
     MenuItem {
         text: "Scroll to bottom"
         onClicked: getDirectoryView().scrollToBottom()
-    }
-
-    function updateView()
-    {
-        updateItemVisibility()
-    }
-
-    function updateItemVisibility()
-    {
-        if (!selectingItems)
-        {
-            selectFilesItem.visible = true
-            stopSelectingFilesItem.visible = false
-        }
-        else
-        {
-            stopSelectingFilesItem.visible = true
-            selectFilesItem.visible = false
-        }
     }
 
 }

@@ -31,7 +31,6 @@ QImage ThumbnailProvider::requestImage(const QString &id, QSize *size, const QSi
         originalImage = originalImage.scaled(requestedHeight, requestedWidth, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
 
         // Save it
-        qDebug() << thumbnailPath.toLatin1();
         bool success = originalImage.save(thumbnailPath, "PNG");
 
         return originalImage;

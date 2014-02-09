@@ -8,6 +8,8 @@ Item {
     anchors.left: parent.left
     anchors.right: parent.right
 
+    onWidthChanged: updateView()
+
     Label {
         id: clipboardLabel
 
@@ -101,6 +103,21 @@ Item {
 
             onClicked: {
                 getDirectoryPage().renameFiles()
+                getDirectoryPage().selectFiles(false)
+            }
+        }
+        ListItem {
+            id: cutFiles
+            width: visible == true ? grid.elementWidth : 0
+            height: visible == true ? grid.elementHeight : 0
+            visible: false
+            Label {
+                text: "Cut"
+                anchors.centerIn: parent
+            }
+
+            onClicked: {
+                clipboard.changeFileOperation("cut", settings.dirPath)
                 getDirectoryPage().selectFiles(false)
             }
         }
@@ -209,11 +226,13 @@ Item {
         // Can copy files
         if (selectingItems == true && clipboard.getSelectedFileCount() > 0)
         {
-            visibleItems += 1
+            visibleItems += 2
+            cutFiles.visible = true
             copyFiles.visible = true
         }
         else
         {
+            cutFiles.visible = false
             copyFiles.visible = false
         }
 
@@ -224,7 +243,7 @@ Item {
         if (visibleItems > 0)
             item.height = (clipboardLabelVisible == true ? Theme.itemSizeSmall : 0) +
                             (selectedFilesLabelVisible == true ? Theme.itemSizeSmall : 0) +
-                            (Math.floor((visibleItems - 1) / 3) * grid.elementHeight) + grid.elementHeight
+                            (Math.floor((visibleItems - 1) / grid.columns) * grid.elementHeight) + grid.elementHeight
         else
             item.height = 0
     }

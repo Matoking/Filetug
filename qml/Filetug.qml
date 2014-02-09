@@ -52,6 +52,11 @@ ApplicationWindow
         return pageStack.find(function(page) { if ('isFilePage' in page) { return true; } else return false; })
     }
 
+    // Get the file operation page
+    property var getFileOperationPage: function() {
+        return pageStack.find(function(page) { if ('isFileOperationPage' in page) { return true; } else return false; })
+    }
+
     // Get the current file view (eg. audio/video/image/text view)
     property var getFileView: function() {
         var page = getFilePage()

@@ -37,7 +37,6 @@ OTHER_FILES += \
     qml/js/directoryViewModel.js \
     qml/pages/dirView/DirectoryPullDownMenu.qml \
     qml/pages/dirView/DirectoryPushUpMenu.qml \
-    qml/pages/dirView/DirectoryPageHeader.qml \
     qml/pages/settings/DirectoryViewSettings.qml \
     qml/pages/dirView/DirectoryListView.qml \
     qml/js/misc.js \

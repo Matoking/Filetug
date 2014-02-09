@@ -7,7 +7,15 @@ Page {
 
     allowedOrientations: Orientation.All
 
+    property bool appStarted: false
+
     onStatusChanged: {
+        if (status == PageStatus.Activating) {
+            if (appStarted)
+                settings.cdUp()
+            else
+                appStarted = true
+        }
         if (status == PageStatus.Active) pageStack.push(Qt.resolvedUrl("DirectoryPage.qml"), null, PageStackAction.Immediate)
     }
 
