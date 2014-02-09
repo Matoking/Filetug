@@ -108,6 +108,7 @@ QString FileInfo::getFileFormatName(QString suffix)
     formatNames.insert("ogg", "OGG audio");
 
     formatNames.insert("apk", "Android application package");
+    formatNames.insert("rpm", "RPM package");
 
     formatNames.insert("txt", "Text file");
 

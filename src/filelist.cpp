@@ -18,8 +18,8 @@ FileList::FileList(QObject *parent) :
     QStringList audioFormats;
     audioFormats << "audio" << "mp3" << "ogg" << "wav";
 
-    QStringList androidFormats;
-    androidFormats << "android" << "apk";
+    QStringList packageFormats;
+    packageFormats << "package" << "apk" << "rpm";
 
     QStringList textFormats;
     textFormats << "text" << "txt" << "conf" << "xml";
@@ -27,7 +27,7 @@ FileList::FileList(QObject *parent) :
     fileFormats.append(imageFormats);
     fileFormats.append(videoFormats);
     fileFormats.append(audioFormats);
-    fileFormats.append(androidFormats);
+    fileFormats.append(packageFormats);
     fileFormats.append(textFormats);
 }
 
