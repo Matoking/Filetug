@@ -51,6 +51,8 @@ SilicaGridView {
 
         height: Theme.itemSizeLarge + fileOperationsView.height
 
+        onWidthChanged: fileOperationsView.updateView()
+
         DirectoryFileOperations {
             id: fileOperationsView
 

@@ -2,15 +2,13 @@ import QtQuick 2.0
 import QtMultimedia 5.0
 import Sailfish.Silica 1.0
 
-// ABANDON ALL HOPE YE WHO ENTER HERE
-
 Flickable {
     id: fileView
 
     signal fileLoaded()
     signal screenClicked()
 
-    // Current displayed image
+    // Current displayed file
     property var fileEntry: null
 
     property bool destroyAfterTransition: false

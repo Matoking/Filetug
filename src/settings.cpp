@@ -67,6 +67,11 @@ Settings::Settings(QObject *parent) :
         m_browseAllFileTypes = settings->value("browseAllFileTypes").toBool();
     else
         m_browseAllFileTypes = false;
+
+    if (settings->contains("showBlackBackground"))
+        m_showBlackBackground = settings->value("showBlackBackground").toBool();
+    else
+        m_showBlackBackground = true;
 }
 
 /*
@@ -318,4 +323,24 @@ void Settings::setBrowseAllFileTypes(const bool &browseAllFileTypes)
 bool Settings::getBrowseAllFileTypes() const
 {
     return m_browseAllFileTypes;
+}
+
+/*
+ *  showBlackBackground - show a black background in image and video views
+ */
+void Settings::setShowBlackBackground(const bool &showBlackBackground)
+{
+    if (m_showBlackBackground != showBlackBackground)
+    {
+        m_showBlackBackground = showBlackBackground;
+        settings->setValue("showBlackBackground", QVariant(showBlackBackground));
+        settings->sync();
+        emit showBlackBackgroundChanged(showBlackBackground);
+        emit fileDisplaySettingsChanged();
+    }
+}
+
+bool Settings::getShowBlackBackground() const
+{
+    return m_showBlackBackground;
 }

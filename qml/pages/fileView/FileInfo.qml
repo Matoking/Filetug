@@ -97,7 +97,14 @@ Page {
                             sourceSize.width: width
                             sourceSize.height: width
 
-                            source: 'thumbnail' in fileEntry ? fileEntry.thumbnail : "image://icons/" + fileEntry.fileType
+                            Component.onCompleted: {
+                                if ('thumbnail' in fileEntry)
+                                    source = fileEntry.thumbnail
+                                else if (fileEntry.fileType == "image")
+                                    source = fileEntry.fullPath
+                                else
+                                    source = "qrc:/icons/" + fileEntry.fileType
+                            }
                         }
 
                         Label {

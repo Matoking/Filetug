@@ -28,6 +28,7 @@ class Settings : public QObject
     // File display
     Q_PROPERTY(float fileOverlayPeriod READ getFileOverlayPeriod WRITE setFileOverlayPeriod NOTIFY fileOverlayPeriodChanged)
     Q_PROPERTY(bool browseAllFileTypes READ getBrowseAllFileTypes WRITE setBrowseAllFileTypes NOTIFY browseAllFileTypesChanged)
+    Q_PROPERTY(bool showBlackBackground READ getShowBlackBackground WRITE setShowBlackBackground NOTIFY showBlackBackgroundChanged)
 public:
     explicit Settings(QObject *parent = 0);
 
@@ -83,6 +84,10 @@ public:
     void setBrowseAllFileTypes(const bool &browseAllFileTypes);
     bool getBrowseAllFileTypes() const;
 
+    // showBlackBackground
+    void setShowBlackBackground(const bool &showBlackBackground);
+    bool getShowBlackBackground() const;
+
 private:
     QString m_dirPath;
     QString m_defaultViewMode;
@@ -99,6 +104,7 @@ private:
 
     float m_fileOverlayPeriod;
     bool m_browseAllFileTypes;
+    bool m_showBlackBackground;
 
 signals:
     void dirPathChanged(const QString &dirPath);
@@ -119,6 +125,7 @@ signals:
 
     void fileOverlayPeriodChanged(const float &fileOverlayPeriod);
     void browseAllFileTypesChanged(const bool &browseAllFileTypes);
+    void showBlackBackgroundChanged(const bool &showBlackBackground);
 
 public slots:
 

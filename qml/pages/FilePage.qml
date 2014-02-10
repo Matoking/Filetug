@@ -24,6 +24,14 @@ Page {
     // An array of files of the same file type
     property var similarFileList: null
 
+    Rectangle {
+        id: blackBackground
+        anchors.fill: parent
+        color: "black"
+
+        visible: false
+    }
+
     Row {
         id: fileRow
         anchors.fill: parent
@@ -328,7 +336,14 @@ Page {
 
         // Disable back navigation if we are displaying an image or a video
         if (entry.fileType == "image" || entry.fileType == "video")
+        {
             showNavigationIndicator = false
+
+            if (settings.showBlackBackground)
+                blackBackground.visible = true
+            else
+                blackBackground.visible = false
+        }
         else
             showNavigationIndicator = true
 

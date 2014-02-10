@@ -8,7 +8,7 @@ Flickable {
     signal fileLoaded()
     signal screenClicked()
 
-    // Current displayed image
+    // Current displayed file
     property var fileEntry: null
 
     // Whether the audio has been loaded at least once, used as a workaround for autoPlay

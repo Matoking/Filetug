@@ -50,6 +50,15 @@ Page {
 
                 onCheckedChanged: settings.browseAllFileTypes = checked
             }
+
+            TextSwitch {
+                text: "Display black background"
+                description: "Display a black background when viewing image and video files"
+
+                checked: settings.showBlackBackground
+
+                onCheckedChanged: settings.showBlackBackground = checked
+            }
         }
     }
 }

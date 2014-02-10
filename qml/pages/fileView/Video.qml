@@ -11,7 +11,7 @@ Flickable {
     signal fileLoaded()
     signal screenClicked()
 
-    // Current displayed image
+    // Current displayed file
     property var fileEntry: null
 
     property bool destroyAfterTransition: false
