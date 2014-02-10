@@ -42,7 +42,6 @@ QVariant FileInfo::getFileInfo(const QString &fullPath)
         fileDetails.insert("Size", bytesToString(fileInfo.size()));
         fileDetails.insert("Last modified", fileInfo.lastModified().toString());
         fileDetails.insert("Created", fileInfo.created().toString());
-        fileDetails.insert("Permissions", Util::getPermissionString(fileInfo.permissions()));
 
         detailEntries.insert("File details", fileDetails);
     }
@@ -85,6 +84,22 @@ QString FileInfo::getFileContent(const QString &fullPath)
     QString textContent = QString(file.readAll());
 
     return textContent;
+}
+
+/*
+ *  Save new file content to a file
+ */
+void FileInfo::setFileContent(const QString &fullPath, const QString &content)
+{
+    QFile file;
+
+    file.setFileName(fullPath);
+    file.open(QIODevice::WriteOnly);
+
+    file.resize(0);
+    file.write(content.toLatin1());
+
+    file.flush();
 }
 
 QString FileInfo::getFileFormatName(QString suffix)
@@ -193,11 +208,25 @@ QVariantMap FileInfo::getFileActions(QString fullPath)
     textAction.insert("process", false);
     actionMap.insert("Show as text", textAction);
 
+    QVariantMap editAsTextAction;
+    editAsTextAction.insert("label", "Edit as text");
+    editAsTextAction.insert("action", "editAsText");
+    editAsTextAction.insert("process", false);
+    actionMap.insert("Edit as text", editAsTextAction);
+
     QVariantMap openSystemAction;
     openSystemAction.insert("label", "Open");
     openSystemAction.insert("action", "openSystem");
     openSystemAction.insert("process", true);
     actionMap.insert("Open", openSystemAction);
+
+    if (fileInfo.isExecutable())
+    {
+        QVariantMap executeAction;
+        executeAction.insert("label", "Execute");
+        executeAction.insert("action", "execute");
+        actionMap.insert("Execute", executeAction);
+    }
 
     return actionMap;
 }

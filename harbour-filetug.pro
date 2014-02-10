@@ -59,7 +59,8 @@ OTHER_FILES += \
     qml/pages/BackPage.qml \
     qml/pages/dirView/DirectoryFileOperations.qml \
     qml/pages/fileView/PermissionEdit.qml \
-    qml/pages/dirView/ShortcutsView.qml
+    qml/pages/dirView/ShortcutsView.qml \
+    qml/pages/fileView/TextEdit.qml
 
 HEADERS += \
     src/thumbnailprovider.h \

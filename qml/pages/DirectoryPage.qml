@@ -239,6 +239,8 @@ Page {
 
         var newView = component.createObject(directoryListRow)
 
+        currentView = newView
+
         // Collapse the current directory
         if (directoryListRow.children.length > 1)
         {

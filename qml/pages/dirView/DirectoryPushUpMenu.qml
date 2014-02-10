@@ -10,7 +10,12 @@ PushUpMenu {
         onClicked: getDirectoryView().scrollToTop()
     }
     MenuItem {
+        text: "Shortcuts"
+        onClicked: getDirectoryPage().openShortcuts()
+    }
+    MenuItem {
         id: directoryProperties
+        visible: 'isShortcutsPage' in getDirectoryView() ? false : true
         text: "Directory properties"
         onClicked: {
             var fullPath = settings.dirPath
@@ -25,9 +30,5 @@ PushUpMenu {
 
             DirectoryViewModel.openFile(entry)
         }
-    }
-    MenuItem {
-        text: "Shortcuts"
-        onClicked: getDirectoryPage().openShortcuts()
     }
 }

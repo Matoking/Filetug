@@ -42,6 +42,10 @@ bool FileProcess::performFileAction(const QString &fullPath, const QString &acti
         program = "xdg-open";
         parameters << fullPath;
     }
+    else if (action == "execute")
+    {
+        program = fullPath;
+    }
 
     // Launch the application
     if (!track)

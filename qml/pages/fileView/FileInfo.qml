@@ -340,6 +340,7 @@ Page {
     function performFileAction(action, track, process)
     {
         console.log("Performing file action")
+
         // Perform the action
         if (process == true)
         {
@@ -357,6 +358,10 @@ Page {
                                          "fileType": "text",
                                          "path": fileEntry.path }
                     DirectoryViewModel.openFile(newFileEntry, "text")
+                    break;
+
+                case 'editAsText':
+                    pageStack.push(Qt.resolvedUrl("TextEdit.qml"), { "fileEntry": fileEntry })
                     break;
             }
         }

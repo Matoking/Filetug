@@ -9,6 +9,8 @@ SilicaListView {
     width: parent.width
     height: parent.height
 
+    property bool isShortcutsPage: true
+
     property bool destroyAfterTransition: false
 
     VerticalScrollDecorator { }
