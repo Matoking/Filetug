@@ -18,6 +18,11 @@ Settings::Settings(QObject *parent) :
     else
         m_defaultViewMode = "grid";
 
+    if (settings->contains("showShortcutsAtStartup"))
+        m_showShortcutsAtStartup = settings->value("showShortcutsAtStartup").toBool();
+    else
+        m_showShortcutsAtStartup = true;
+
     if (settings->contains("showHiddenFiles"))
         m_showHiddenFiles = settings->value("showHiddenFiles").toBool();
     else
@@ -124,6 +129,26 @@ void Settings::setDefaultViewMode(const QString &defaultViewMode)
 QString Settings::getDefaultViewMode() const
 {
     return m_defaultViewMode;
+}
+
+/*
+ *  showShortcutsAtStartup - show the shortcuts view at startup instead of the last location
+ */
+void Settings::setShowShortcutsAtStartup(const bool &showShortcutsAtStartup)
+{
+    if (m_showShortcutsAtStartup != showShortcutsAtStartup)
+    {
+        m_showShortcutsAtStartup = showShortcutsAtStartup;
+        settings->setValue("showShortcutsAtStartup", QVariant(showShortcutsAtStartup));
+        settings->sync();
+        emit showShortcutsAtStartupChanged(showShortcutsAtStartup);
+        emit directoryViewSettingsChanged();
+    }
+}
+
+bool Settings::getShowShortcutsAtStartup() const
+{
+    return m_showShortcutsAtStartup;
 }
 
 /*

@@ -16,5 +16,8 @@
         <file alias="properties">data/icons/document-properties.svg</file>
         <file alias="pause">data/icons/media-playback-pause.svg</file>
         <file alias="package">data/icons/package-x-generic.svg</file>
+        <file alias="sdcard">data/icons/media-flash.svg</file>
+        <file alias="downloads">data/icons/emblem-downloads.svg</file>
+        <file alias="up">data/icons/go-up.svg</file>
     </qresource>
 </RCC>

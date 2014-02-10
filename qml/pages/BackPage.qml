@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-// A placeholder page that is shown while the actual directory view is loaded
+// A placeholder page that is shown while the actual directory view is loaded or when the application is started
 Page {
     id: page
 

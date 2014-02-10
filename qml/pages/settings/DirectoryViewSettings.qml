@@ -42,6 +42,14 @@ Page {
                     }
                 }
                 TextSwitch {
+                    text: "Show Shortcuts at startup"
+                    description: "Show Shortcuts page instead of the last location when application is started"
+
+                    checked: settings.showShortcutsAtStartup
+
+                    onCheckedChanged: settings.showShortcutsAtStartup = checked
+                }
+                TextSwitch {
                     text: "Show hidden files"
                     description: "Show hidden files and folders"
 

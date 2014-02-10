@@ -36,6 +36,10 @@ ApplicationWindow
 {
     property variant currentDirectoryView: null
 
+    // If directory page is created at least once this is true
+    // Used to open Shortcuts page at startup
+    property bool directoryPageCreated: false
+
     // Get the current directory page
     property var getDirectoryPage: function() {
         return pageStack.find(function(page) { if ('isDirectoryPage' in page) { return true; } else return false; })
@@ -44,6 +48,7 @@ ApplicationWindow
     // Get the current directory view (eg. a list/grid of files)
     property var getDirectoryView: function() {
         var page = getDirectoryPage()
+
         return page.currentView
     }
 
@@ -60,6 +65,7 @@ ApplicationWindow
     // Get the current file view (eg. audio/video/image/text view)
     property var getFileView: function() {
         var page = getFilePage()
+
         return page.currentView
     }
 

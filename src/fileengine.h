@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QClipboard>
+#include <QDir>
 #include "filelist.h"
 #include "fileinfo.h"
 #include "settings.h"
@@ -38,6 +39,8 @@ public:
     Q_INVOKABLE void copyToClipboard(const QString &string);
 
     Q_INVOKABLE bool changeFilePermission(QString fullPath, int permissionPos);
+
+    Q_INVOKABLE bool isSdCardMounted();
 
     void setCurrentFileIndex(const int &currentFileIndex);
     int getCurrentFileIndex() const;

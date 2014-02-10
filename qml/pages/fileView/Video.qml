@@ -157,6 +157,8 @@ Flickable {
         onTriggered: updateSlider()
     }
 
+    Component.onDestruction: destroyView()
+
     function loadFile()
     {
         if (video.status == MediaPlayer.Loaded)
@@ -222,7 +224,7 @@ Flickable {
     }
 
     /*
-     *  Called before a new view is created, used for deleting the video object
+     *  Called before a new view is created or when the view is removed, used for deleting the video object
      */
     function destroyView()
     {

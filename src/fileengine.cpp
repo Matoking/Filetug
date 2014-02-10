@@ -210,6 +210,17 @@ bool FileEngine::changeFilePermission(QString fullPath, int permissionPos)
 }
 
 /*
+ *  Check if the SD card is mounted
+ */
+bool FileEngine::isSdCardMounted()
+{
+    // Location for SD card
+    QDir dir("/run/user/100000/media/sdcard");
+
+    return dir.exists();
+}
+
+/*
  *  currentFileIndex - the file index for the currently opened item
  */
 void FileEngine::setCurrentFileIndex(const int &currentFileIndex)

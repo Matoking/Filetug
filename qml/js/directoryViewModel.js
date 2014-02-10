@@ -36,6 +36,10 @@ function updateFileList(fileModel, path)
 
             default:
                 entry.thumbnail = "qrc:/icons/" + entry.fileType
+
+                if (entry.fileType == "directory" && entry.fileName == "..")
+                    entry.thumbnail = "qrc:/icons/up"
+
                 break;
         }
 

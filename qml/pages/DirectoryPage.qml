@@ -5,6 +5,7 @@ Page {
     id: mainPage
 
     property bool isDirectoryPage: true
+    property bool pageCreated: false
 
     allowedOrientations: Orientation.All
     property string currentDir: settings.dirPath
@@ -13,7 +14,7 @@ Page {
 
     showNavigationIndicator: false
 
-    backNavigation: settings.dirPath == "/" ? false : true
+    backNavigation: false
 
     VerticalScrollDecorator { }
 
@@ -124,7 +125,15 @@ Page {
         }
     }
 
-    onPageContainerChanged: openDirectory(settings.dirPath)
+    onPageContainerChanged: {
+        if (settings.showShortcutsAtStartup && !directoryPageCreated)
+        {
+            openShortcuts()
+            directoryPageCreated = true
+        }
+        else
+            openDirectory(settings.dirPath)
+    }
 
     /*
      *  Open a directory
@@ -211,6 +220,37 @@ Page {
         }
 
         getDirectoryView().scrollToTop()
+
+        updateBackNavigation()
+    }
+
+    /*
+     *  Open shortcuts view
+     */
+    function openShortcuts()
+    {
+        clipboard.clearSelectedFiles()
+        selectingItems = false
+
+        // Reset current file index
+        engine.currentFileIndex = -1
+
+        var component = Qt.createComponent(Qt.resolvedUrl('dirView/ShortcutsView.qml'))
+
+        var newView = component.createObject(directoryListRow)
+
+        // Collapse the current directory
+        if (directoryListRow.children.length > 1)
+        {
+            var currentDir = directoryListRow.children[0]
+
+            currentDir.x = 0
+            currentDir.collapseToLeft(true)
+            newView.x = mainPage.width
+            newView.collapseToLeft(false)
+        }
+
+        backNavigation = false
     }
 
     /*
@@ -292,5 +332,16 @@ Page {
     function showScrollToBottom(show)
     {
         scrollToBottomButton.visible = show
+    }
+
+    /*
+     *  Update the backNavigation parameter
+     */
+    function updateBackNavigation()
+    {
+        if (settings.dirPath == "/")
+            backNavigation = false
+        else
+            backNavigation = true
     }
 }
