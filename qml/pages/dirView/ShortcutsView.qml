@@ -121,22 +121,27 @@ SilicaListView {
                            "name": "Last location",
                            "thumbnail": "qrc:/icons/up",
                            "location": settings.dirPath })
+
         listModel.append({ "section": "Locations",
-                           "name": "Pictures",
-                           "thumbnail": "qrc:/icons/image",
-                           "location": "/home/nemo/Pictures"})
+                           "name": "Documents",
+                           "thumbnail": "qrc:/icons/text",
+                           "location": "/home/nemo/Documents"})
+        listModel.append({ "section": "Locations",
+                           "name": "Downloads",
+                           "thumbnail": "qrc:/icons/downloads",
+                           "location": "/home/nemo/Downloads"})
         listModel.append({ "section": "Locations",
                            "name": "Music",
                            "thumbnail": "qrc:/icons/audio",
                            "location": "/home/nemo/Music"})
         listModel.append({ "section": "Locations",
+                           "name": "Pictures",
+                           "thumbnail": "qrc:/icons/image",
+                           "location": "/home/nemo/Pictures"})
+        listModel.append({ "section": "Locations",
                            "name": "Videos",
                            "thumbnail": "qrc:/icons/video",
                            "location": "/home/nemo/Videos"})
-        listModel.append({ "section": "Locations",
-                           "name": "Downloads",
-                           "thumbnail": "qrc:/icons/downloads",
-                           "location": "/home/nemo/Downloads"})
         listModel.append({ "section": "Locations",
                            "name": "Android storage",
                            "thumbnail": "qrc:/icons/directory",

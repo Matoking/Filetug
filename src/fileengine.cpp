@@ -142,6 +142,11 @@ void FileEngine::createEntries(const QString &jsonString)
             QDir dir(path);
             bool success = dir.mkdir(QString("%1/%2").arg(path, name));
         }
+        else if (type == "file")
+        {
+            QFile file(QString("%1/%2").arg(path, name));
+            file.open(QFile::WriteOnly);
+        }
     }
 }
 

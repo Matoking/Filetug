@@ -7,6 +7,8 @@ Dialog {
     property string operation: ""
     property string path: ""
 
+    property string currentFileType: "directory"
+
     property var files: [ ]
 
     canAccept: true
@@ -41,8 +43,6 @@ Dialog {
                 contentHeight: column.height
 
                 Column {
-                    y: Theme.paddingSmall
-
                     id: column
 
                     spacing: Theme.paddingSmall
@@ -100,10 +100,15 @@ Dialog {
 
         footer: BackgroundItem {
             id: backgroundItem
+
+            property bool menuOpen: contextMenu != null && contextMenu.parent === backgroundItem
+
             y: listView.contentHeight
 
             width: parent.width
-            height: Theme.itemSizeLarge
+            height: menuOpen ? contextMenu.height + Theme.itemSizeLarge : Theme.itemSizeLarge
+
+            onPressAndHold: contextMenu.show(backgroundItem)
 
             Row {
                 id: row
@@ -114,26 +119,51 @@ Dialog {
                 height: parent.height
 
                 Label {
-                    width: dialog.width - Theme.paddingLarge - Theme.itemSizeMedium
-                    height: parent.height
+                    id: addNewLabel
+
+                    width: paintedWidth
+                    height: Theme.itemSizeLarge
 
                     verticalAlignment: Text.AlignVCenter
 
                     // TODO: Allow user to create files
-                    text: "Add new directory"
+                    text: "Add new "
+                }
+                Label {
+                    width: paintedWidth
+                    height: Theme.itemSizeLarge
+
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+
+                    text: currentFileType
 
                     color: Theme.highlightColor
                 }
+            }
 
-                IconButton {
-                    width: Theme.itemSizeMedium
-                    height: Theme.itemSizeMedium
+            IconButton {
+                x: dialog.width - Theme.itemSizeMedium
+                width: Theme.itemSizeMedium
+                height: Theme.itemSizeMedium
 
-                    y: parent.y + (parent.height / 2) - (Theme.itemSizeMedium / 2)
+                anchors.verticalCenter: backgroundItem.verticalCenter
 
-                    icon.source: "image://theme/icon-m-add"
+                icon.source: "image://theme/icon-m-add"
 
-                    onClicked: addNewEntry()
+                onClicked: addNewEntry()
+            }
+
+            ContextMenu {
+                id: contextMenu
+
+                MenuItem {
+                    text: "directory"
+                    onClicked: currentFileType = "directory"
+                }
+                MenuItem {
+                    text: "file"
+                    onClicked: currentFileType = "file"
                 }
             }
         }
@@ -145,7 +175,7 @@ Dialog {
     function addNewEntry()
     {
         fileModel.append({ "id": fileModel.count,
-                           "type": "directory",
+                           "type": currentFileType,
                            "path": path,
                            "name": "" })
 

@@ -94,10 +94,10 @@ void FileInfo::setFileContent(const QString &fullPath, const QString &content)
     QFile file;
 
     file.setFileName(fullPath);
-    file.open(QIODevice::WriteOnly);
+    file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text);
 
     file.resize(0);
-    file.write(content.toLatin1());
+    file.write(content.toLocal8Bit());
 
     file.flush();
 }
@@ -170,7 +170,7 @@ QString FileInfo::bytesToString(qint64 bytes)
     }
     else
     {
-        return QString("%1%2").arg(sign, QString::number(readable,'f',2)); // Byte
+        return QString("%1%2 B").arg(sign, QString::number(readable,'f',2)); // Byte
     }
 
     readable = readable / 1000;
