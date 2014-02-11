@@ -13,14 +13,9 @@ PullDownMenu {
         onClicked: pageStack.push(Qt.resolvedUrl("../SettingsPage.qml"))
     }
     MenuItem {
-        text: "Go to home"
-        onClicked: getDirectoryPage().openDirectory("/home/nemo", "left")
-    }
-    MenuItem {
         text: "New..."
         onClicked: getDirectoryPage().addNewFiles()
     }
-
     MenuItem {
         text: "Scroll to bottom"
         onClicked: getDirectoryView().scrollToBottom()
