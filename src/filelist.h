@@ -10,6 +10,7 @@
 #include <QDateTime>
 #include <QDebug>
 
+#include "directoryworker.h"
 #include "fileinfoentry.h"
 #include "util.h"
 
@@ -20,11 +21,13 @@ public:
     explicit FileList(QObject *parent = 0);
 
     Q_INVOKABLE QVariant getFileList(const QString &path, const QString &fileTypes = QString(""));
+    QList<FileInfoEntry*> getFileInfoEntryList(const QString &path, const QString &fileTypes);
+
+    Q_INVOKABLE void updateFileList(const QString &path);
 
     Q_INVOKABLE QString getCurrentDirectory();
 
-    QList<QObject*> getFileObjectList(const QString &path, const QString &fileTypes = QString(""));
-    QList<FileInfoEntry*> getFileInfoEntryList(const QString &path, const QString &fileTypes = QString(""));
+    QList<QObject*> toFileObjectList(QList<FileInfoEntry*> fileInfoEntryList);
 
     Q_INVOKABLE bool containsFileType(const QString &fileType);
 
@@ -57,7 +60,11 @@ private:
 signals:
     void currentDirectoryChanged(const QString &currentDirectory);
 
+    void fileListCreated(QVariant newFileList, QString path);
+
 public slots:
+    void fileInfoEntryListCreated(QList<FileInfoEntry*> fileInfoEntryList, QString path, QStringList containedFileTypes);
+
     void setShowHiddenFiles(const bool &showHiddenFiles);
 
     void setSortBy(const QString &sortBy);

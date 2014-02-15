@@ -332,7 +332,7 @@ Page {
         else if ('thumbnail' in entry)
             coverModel.setIconSource(entry.thumbnail)
         else
-            coverModel.setIconSource("image://icons/" + entry.fileType)
+            coverModel.setIconSource("qrc:/icons/" + entry.fileType)
 
         // Disable back navigation if we are displaying an image or a video
         if (entry.fileType == "image" || entry.fileType == "video")
@@ -345,7 +345,10 @@ Page {
                 blackBackground.visible = false
         }
         else
+        {
             showNavigationIndicator = true
+            blackBackground.visible = false
+        }
 
         var fileIndex = engine.updateCurrentFileIndex(entry.fullPath,
                                                       entry.path,

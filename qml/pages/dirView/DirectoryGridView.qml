@@ -10,6 +10,9 @@ SilicaGridView {
     property variant directoryView: null
 
     property bool destroyAfterTransition: false
+    property bool fileListLoaded: false
+
+    property string dirView: "grid"
 
     property string path: ""
 
@@ -84,6 +87,15 @@ SilicaGridView {
             slope: 4
             offset: 0.75
             sourceItem: headerLabel
+        }
+        BusyIndicator {
+            anchors.topMargin: Theme.itemSizeLarge * 2
+            anchors.top: headerLabel.bottom
+            anchors.horizontalCenter: headerLabel.horizontalCenter
+            size: BusyIndicatorSize.Large
+
+            running: !fileListLoaded
+            visible: !fileListLoaded
         }
     }
 
@@ -236,8 +248,19 @@ SilicaGridView {
         id: fileModel
     }
 
+    Connections {
+        target: fileList
+        onFileListCreated: {
+            if (!destroyAfterTransition) {
+                DirectoryViewModel.updateFileList(fileModel, newFileList)
+                fileListLoaded = true
+            }
+        }
+    }
+
     onPathChanged: {
-        DirectoryViewModel.updateFileList(fileModel, path)
+        console.log("damn")
+        DirectoryViewModel.getFileList(fileModel, path)
     }
 
     function removeSelections()

@@ -25,7 +25,8 @@ SOURCES += \
     src/clipboard.cpp \
     src/main.cpp \
     src/covermodel.cpp \
-    src/util.cpp
+    src/util.cpp \
+    src/directoryworker.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -74,7 +75,8 @@ HEADERS += \
     src/worker.h \
     src/clipboard.h \
     src/covermodel.h \
-    src/util.h
+    src/util.h \
+    src/directoryworker.h
 
 RESOURCES += \
     resources.qrc

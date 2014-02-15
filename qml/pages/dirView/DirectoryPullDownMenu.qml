@@ -14,6 +14,7 @@ PullDownMenu {
     }
     MenuItem {
         text: "New..."
+        visible: 'isShortcutsPage' in getDirectoryView() ? false : true
         onClicked: getDirectoryPage().addNewFiles()
     }
     MenuItem {

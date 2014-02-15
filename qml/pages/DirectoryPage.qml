@@ -138,32 +138,19 @@ Page {
     /*
      *  Open a directory
      */
-    function openDirectory(path, collapseDirection, skipAnimation)
+    function openDirectory(path, collapseDirection, skipAnimation, viewMode)
     {
         collapseDirection = typeof collapseDirection !== 'undefined' ? collapseDirection : "left"
         skipAnimation = typeof skipAnimation !== 'undefined' ? skipAnimation : false
+        viewMode = typeof viewMode !== 'undefined' ? viewMode : settings.defaultViewMode
 
         // If there are two pages open (eg. a transition is in progress), ignore this
-        if (directoryListRow.children.length >= 2)
-            return;
+        if (directoryListRow.children.length >= 2 && !skipAnimation)
+            return
 
         // Clear the list of selected files
         clipboard.clearSelectedFiles()
         selectingItems = false
-
-        var viewMode = settings.defaultViewMode
-
-        // Check if we are using gallery mode and if there are image files in
-        // the list
-        if (settings.galleryMode && viewMode != "grid")
-        {
-            // Get the file list already, so we can check if it has the file type
-            // Since the results are cached it won't matter much in terms of performance
-            fileList.getFileList(path)
-
-            if (fileList.containsFileType("image"))
-                viewMode = "grid"
-        }
 
         // Reset the current file index
         engine.currentFileIndex = -1
@@ -184,8 +171,6 @@ Page {
         var newDir = component.createObject(directoryListRow, { "path": path, "directoryView": mainPage })
 
         currentView = newDir
-
-        //pageHeaderText.text = path
 
         settings.dirPath = path
 

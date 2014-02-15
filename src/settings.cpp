@@ -5,7 +5,7 @@ Settings::Settings(QObject *parent) :
 {
     qDebug() << "Reading config";
 
-    settings = new QSettings("Matoking", "MediaViewer");
+    settings = new QSettings("Matoking", "Filetug");
 
     // Get stored values
     if (settings->contains("dirPath"))

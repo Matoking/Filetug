@@ -79,6 +79,7 @@ void FileEngine::performFileOperation(const QString &fileOperation,
     connect(worker, SIGNAL(progressValueChanged(double)), this, SIGNAL(progressValueChanged(double)));
 
     connect(worker, SIGNAL(fileOperationFinished()), this, SIGNAL(fileOperationFinished()));
+    connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
 
     if (fileOperation == "paste")
     {

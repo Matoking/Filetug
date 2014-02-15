@@ -1,12 +1,38 @@
 /*
- *  Updates the file list
+ *  Get the file list
  */
-function updateFileList(fileModel, path)
+function getFileList(fileModel, path)
 {
-    console.log(path)
-    var newFileList = fileList.getFileList(path);
+    // Check if the file list is already available
+    // If not, call an asynchronous worker to update it
+    var newFileList = fileList.getFileList(path)
 
+    if (newFileList.length == 0)
+        fileList.updateFileList(path)
+    else
+        updateFileList(fileModel, newFileList)
+}
+
+/*
+ *  Updates the file list model so that the files are displayed
+ */
+function updateFileList(fileModel, newFileList)
+{
     fileModel.clear();
+
+    // Check if we are using gallery mode and if there are image files in
+    // the list
+    if (settings.galleryMode && dirView != "grid")
+    {
+        // Get the file list already, so we can check if it has the file type
+        if (fileList.containsFileType("image"))
+        {
+            // Replace the directory view
+            getDirectoryPage().openDirectory(settings.dirPath, "left", true, "grid")
+            destroy() // Destroy the redundant directory view
+            return
+        }
+    }
 
     for (var i=0; i < newFileList.length; i++)
     {
