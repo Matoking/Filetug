@@ -231,7 +231,11 @@ SilicaGridView {
         from: fileListView.x
         to: fileListView.x - fileListView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) fileListView.destroy()
+
+        onStopped: {
+            if (destroyAfterTransition) fileListView.destroy()
+            else loadFileList()
+        }
     }
 
     SmoothedAnimation {
@@ -241,7 +245,11 @@ SilicaGridView {
         from: fileListView.x
         to: fileListView.x + fileListView.width
         duration: 200
-        onStopped: if (destroyAfterTransition) fileListView.destroy()
+
+        onStopped: {
+            if (destroyAfterTransition) fileListView.destroy()
+            else loadFileList()
+        }
     }
 
     ListModel {
@@ -253,13 +261,15 @@ SilicaGridView {
         onFileListCreated: {
             if (!destroyAfterTransition) {
                 DirectoryViewModel.updateFileList(fileModel, newFileList)
-                fileListLoaded = true
             }
         }
     }
 
-    onPathChanged: {
-        console.log("damn")
+    /*
+     *  Starts loading the file list which will be displayed on the view
+     */
+    function loadFileList()
+    {
         DirectoryViewModel.getFileList(fileModel, path)
     }
 

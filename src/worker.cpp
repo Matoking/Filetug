@@ -73,16 +73,22 @@ void Worker::pasteFiles(bool cut)
         QString sourcePath = m_directoryList.at(i);
         QString newDirPath = QString("%1/%2").arg(m_destination, sourceDir.relativeFilePath(sourcePath));
 
+        qDebug() << sourcePath.toLatin1() << " > " << newDirPath.toLatin1();
+
         directoryList.append(newDirPath);
     }
 
     emit progressTextChanged("Creating directories...");
+
+    qDebug() << "FILES";
 
     // Create a list of files to be copied
     for (int i=0; i < m_fileList.count(); i++)
     {
         QString sourcePath = m_fileList.at(i);
         QString newFilePath = QString("%1/%2").arg(m_destination, sourceDir.relativeFilePath(sourcePath));
+
+        qDebug() << sourcePath.toLatin1() << " > " << newFilePath.toLatin1();
 
         m_fileMap.insert(sourcePath, newFilePath);
     }
@@ -141,7 +147,7 @@ void Worker::pasteFiles(bool cut)
         }
 
         // Copy the file
-        bool success = sourceFile.copy(newFilePath);
+        bool success = sourceFile.copy(sourceFilePath, newFilePath);
 
         if (!success)
             fileErrorMap.insert(newFilePath, sourceFile.error());
@@ -164,7 +170,7 @@ void Worker::pasteFiles(bool cut)
     {
         fileCount = 0;
 
-        if (fileErrorMap.count() == 0)
+        if (fileErrorMap.count() == 0 && directoryErrorMap.count() == 0)
         {
             // We copied all files successfully, so delete the old ones now
             i.toFront();

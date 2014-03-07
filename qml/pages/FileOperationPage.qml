@@ -8,6 +8,7 @@ Page {
     property string clipboardDir: ""
 
     property bool isFileOperationPage: true
+    property bool fileOperationStarted: false
 
     property var clipboard: [ ]
     property var selectedFiles: [ ]
@@ -88,12 +89,12 @@ Page {
         }
     }
 
-    onPageContainerChanged: {
-        performFileOperation()
-    }
+    onStatusChanged: if (status == PageStatus.Active && !fileOperationStarted) performFileOperation()
 
     function performFileOperation()
     {
+        fileOperationStarted = true
+
         switch (fileOperation)
         {
             case "paste":

@@ -49,7 +49,10 @@ ApplicationWindow
     property var getDirectoryView: function() {
         var page = getDirectoryPage()
 
-        return page.currentView
+        if (page.currentView)
+            return page.currentView
+        else
+            return false
     }
 
     // Get the current file page

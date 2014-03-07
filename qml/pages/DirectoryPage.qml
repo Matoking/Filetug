@@ -132,7 +132,7 @@ Page {
             directoryPageCreated = true
         }
         else
-            openDirectory(settings.dirPath)
+            openDirectory(settings.dirPath, "left", true)
     }
 
     /*
@@ -143,10 +143,6 @@ Page {
         collapseDirection = typeof collapseDirection !== 'undefined' ? collapseDirection : "left"
         skipAnimation = typeof skipAnimation !== 'undefined' ? skipAnimation : false
         viewMode = typeof viewMode !== 'undefined' ? viewMode : settings.defaultViewMode
-
-        // If there are two pages open (eg. a transition is in progress), ignore this
-        if (directoryListRow.children.length >= 2 && !skipAnimation)
-            return
 
         // Clear the list of selected files
         clipboard.clearSelectedFiles()
@@ -187,6 +183,7 @@ Page {
             {
                 currentDir.destroy()
                 newDir.x = 0
+                newDir.loadFileList()
             }
             else if (collapseDirection == "left")
             {
@@ -222,9 +219,7 @@ Page {
 
         var component = Qt.createComponent(Qt.resolvedUrl('dirView/ShortcutsView.qml'))
 
-        var newView = component.createObject(directoryListRow)
-
-        currentView = newView
+        currentView = component.createObject(directoryListRow)
 
         // Collapse the current directory
         if (directoryListRow.children.length > 1)
@@ -238,6 +233,15 @@ Page {
         }
 
         backNavigation = false
+    }
+
+    /*
+     *  Change the current directory view
+     */
+    function changeDirectoryView(dirView)
+    {
+        currentView.destroy()
+        openDirectory(settings.dirPath, "left", true, dirView)
     }
 
     /*

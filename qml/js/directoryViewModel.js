@@ -28,8 +28,7 @@ function updateFileList(fileModel, newFileList)
         if (fileList.containsFileType("image"))
         {
             // Replace the directory view
-            getDirectoryPage().openDirectory(settings.dirPath, "left", true, "grid")
-            destroy() // Destroy the redundant directory view
+            getDirectoryPage().changeDirectoryView('grid')
             return
         }
     }
@@ -69,10 +68,10 @@ function updateFileList(fileModel, newFileList)
                 break;
         }
 
-        console.log(entry.fullPath)
-
         fileModel.append(entry);
     }
+
+    fileListLoaded = true
 }
 
 /*
