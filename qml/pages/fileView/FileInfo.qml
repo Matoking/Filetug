@@ -138,6 +138,8 @@ Page {
             PullDownMenu {
                 id: pullDownMenu
 
+                visible: false
+
                 Repeater {
                     model: pullDownModel
                     MenuItem {
@@ -284,11 +286,11 @@ Page {
             }
         }
 
-        var actionCount = 0
-
         for (var action in fileData.actions)
         {
             var actionEntry = fileData.actions[action]
+
+            pullDownMenu.visible = true
 
             // Add actions
             pullDownModel.append( { "label": actionEntry.label,

@@ -202,25 +202,29 @@ QVariantMap FileInfo::getFileActions(QString fullPath)
         actionMap.insert("Install", rpmAction);
     }
 
-    QVariantMap textAction;
-    textAction.insert("label", "Show as text");
-    textAction.insert("action", "showAsText");
-    textAction.insert("process", false);
-    actionMap.insert("Show as text", textAction);
+    // Don't allow users to perform these actions if the file is actually a directory
+    if (!fileInfo.isDir())
+    {
+        QVariantMap textAction;
+        textAction.insert("label", "Show as text");
+        textAction.insert("action", "showAsText");
+        textAction.insert("process", false);
+        actionMap.insert("Show as text", textAction);
 
-    QVariantMap editAsTextAction;
-    editAsTextAction.insert("label", "Edit as text");
-    editAsTextAction.insert("action", "editAsText");
-    editAsTextAction.insert("process", false);
-    actionMap.insert("Edit as text", editAsTextAction);
+        QVariantMap editAsTextAction;
+        editAsTextAction.insert("label", "Edit as text");
+        editAsTextAction.insert("action", "editAsText");
+        editAsTextAction.insert("process", false);
+        actionMap.insert("Edit as text", editAsTextAction);
 
-    QVariantMap openSystemAction;
-    openSystemAction.insert("label", "Open");
-    openSystemAction.insert("action", "openSystem");
-    openSystemAction.insert("process", true);
-    actionMap.insert("Open", openSystemAction);
+        QVariantMap openSystemAction;
+        openSystemAction.insert("label", "Open");
+        openSystemAction.insert("action", "openSystem");
+        openSystemAction.insert("process", true);
+        actionMap.insert("Open", openSystemAction);
+    }
 
-    if (fileInfo.isExecutable())
+    if (fileInfo.isExecutable() && !fileInfo.isDir())
     {
         QVariantMap executeAction;
         executeAction.insert("label", "Execute");

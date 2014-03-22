@@ -125,7 +125,7 @@ SilicaListView {
         listModel.append({ "section": "Locations",
                            "name": "Documents",
                            "thumbnail": "qrc:/icons/text",
-                           "location": "/home/nemo/Documents"})
+                           "location": StandardPaths.documents })
         listModel.append({ "section": "Locations",
                            "name": "Downloads",
                            "thumbnail": "qrc:/icons/downloads",
@@ -133,15 +133,15 @@ SilicaListView {
         listModel.append({ "section": "Locations",
                            "name": "Music",
                            "thumbnail": "qrc:/icons/audio",
-                           "location": "/home/nemo/Music"})
+                           "location": StandardPaths.music })
         listModel.append({ "section": "Locations",
                            "name": "Pictures",
                            "thumbnail": "qrc:/icons/image",
-                           "location": "/home/nemo/Pictures"})
+                           "location": StandardPaths.pictures })
         listModel.append({ "section": "Locations",
                            "name": "Videos",
                            "thumbnail": "qrc:/icons/video",
-                           "location": "/home/nemo/Videos"})
+                           "location": StandardPaths.videos })
         listModel.append({ "section": "Locations",
                            "name": "Android storage",
                            "thumbnail": "qrc:/icons/directory",

@@ -52,7 +52,7 @@ SilicaGridView {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        height: Theme.itemSizeLarge + fileOperationsView.height
+        height: (settings.showDirHeader == true ? Theme.itemSizeLarge : 0) + fileOperationsView.height
 
         onWidthChanged: fileOperationsView.updateView()
 
@@ -89,9 +89,8 @@ SilicaGridView {
             sourceItem: headerLabel
         }
         BusyIndicator {
-            anchors.topMargin: Theme.itemSizeLarge * 2
-            anchors.top: headerLabel.bottom
-            anchors.horizontalCenter: headerLabel.horizontalCenter
+            x: fileListView.width - (fileListView.width / 2) - (width / 2)
+            y: fileListView.height - (fileListView.height / 2) - (height / 2)
             size: BusyIndicatorSize.Large
 
             running: !fileListLoaded
