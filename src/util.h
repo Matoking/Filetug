@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <QString>
+#include <QDir>
 #include <QFile>
 
 class Util

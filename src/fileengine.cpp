@@ -217,13 +217,17 @@ bool FileEngine::changeFilePermission(QString fullPath, int permissionPos)
 
 /*
  *  Check if the SD card is mounted
+ *  If it is, return the mount point path
+ *  If not, return an empty string
  */
-bool FileEngine::isSdCardMounted()
+QString FileEngine::getSdCardMountPath()
 {
-    // Location for SD card
-    QDir dir("/run/user/100000/media/sdcard");
-
-    return dir.exists();
+    if (QDir("/run/user/100000/media/sdcard").exists())
+        return "/run/user/100000/media/sdcard";
+    else if (QDir("/media/sdcard").exists())
+        return "/media/sdcard";
+    else
+        return "";
 }
 
 /*

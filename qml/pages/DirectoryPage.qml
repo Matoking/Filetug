@@ -228,8 +228,8 @@ Page {
 
             currentDir.x = 0
             currentDir.collapseToLeft(true)
-            newView.x = mainPage.width
-            newView.collapseToLeft(false)
+            currentView.x = mainPage.width
+            currentView.collapseToLeft(false)
         }
 
         backNavigation = false

@@ -40,7 +40,7 @@ public:
 
     Q_INVOKABLE bool changeFilePermission(QString fullPath, int permissionPos);
 
-    Q_INVOKABLE bool isSdCardMounted();
+    Q_INVOKABLE QString getSdCardMountPath();
 
     void setCurrentFileIndex(const int &currentFileIndex);
     int getCurrentFileIndex() const;

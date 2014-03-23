@@ -10,6 +10,26 @@ PushUpMenu {
         onClicked: getDirectoryView().scrollToTop()
     }
     MenuItem {
+        id: addToBookmarks
+        text: "Add to bookmarks"
+        onClicked: {
+            visible = false
+            removeFromBookmarks.visible = true
+            settings.addBookmarkPath(settings.dirPath, settings.dirPath)
+        }
+        visible: !settings.isPathInBookmarks(settings.dirPath)
+    }
+    MenuItem {
+        id: removeFromBookmarks
+        text: "Remove from bookmarks"
+        onClicked: {
+            visible = false
+            addToBookmarks.visible = true
+            settings.removeBookmarkPath(settings.dirPath)
+        }
+        visible: settings.isPathInBookmarks(settings.dirPath)
+    }
+    MenuItem {
         text: "Shortcuts"
         onClicked: getDirectoryPage().openShortcuts()
     }

@@ -40,6 +40,14 @@ QString FileList::getCurrentDirectory()
 }
 
 /*
+ *  Get the user's home directory path
+ */
+QString FileList::getHomePath()
+{
+    return QDir::homePath();
+}
+
+/*
  *  Call a worker to change the file list
  */
 void FileList::updateFileList(const QString &path)

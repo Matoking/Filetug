@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE void updateFileList(const QString &path);
 
     Q_INVOKABLE QString getCurrentDirectory();
+    Q_INVOKABLE QString getHomePath();
 
     QList<QObject*> toFileObjectList(QList<FileInfoEntry*> fileInfoEntryList);
 

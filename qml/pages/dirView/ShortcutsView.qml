@@ -27,7 +27,7 @@ SilicaListView {
     delegate: Component {
         id: listItem
 
-        IconButton {
+        BackgroundItem {
             id: iconButton
             width: shortcutsView.width
             height: Screen.height / 12
@@ -73,6 +73,27 @@ SilicaListView {
 
                 text: model.location
             }
+            IconButton {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.rightMargin: Theme.paddingLarge
+
+                width: Theme.itemSizeSmall
+                height: Theme.itemSizeSmall
+
+                visible: model.bookmark ? true : false
+
+                icon.source: "image://theme/icon-m-close"
+
+                onClicked: {
+                    if (!model.bookmark)
+                        return
+
+                    settings.removeBookmarkPath(model.location)
+
+                    updateModel()
+                }
+            }
         }
     }
 
@@ -116,6 +137,8 @@ SilicaListView {
      */
     function updateModel()
     {
+        listModel.clear()
+
         // Add locations
         listModel.append({ "section": "Locations",
                            "name": "Last location",
@@ -129,7 +152,7 @@ SilicaListView {
         listModel.append({ "section": "Locations",
                            "name": "Downloads",
                            "thumbnail": "qrc:/icons/downloads",
-                           "location": "/home/nemo/Downloads"})
+                           "location": fileList.getHomePath() + "/Downloads" })
         listModel.append({ "section": "Locations",
                            "name": "Music",
                            "thumbnail": "qrc:/icons/audio",
@@ -147,13 +170,27 @@ SilicaListView {
                            "thumbnail": "qrc:/icons/directory",
                            "location": "/data/sdcard"})
 
+        // Add bookmarks if there are any
+        var bookmarks = settings.getBookmarks()
+
+        for (var key in bookmarks)
+        {
+            var entry = bookmarks[key];
+
+            listModel.append({ "section": "Bookmarks",
+                               "name": entry,
+                               "thumbnail": "qrc:/icons/sdcard",
+                               "location": key,
+                               "bookmark": true })
+        }
+
         // Add SD card if it's mounted
-        if (engine.isSdCardMounted())
+        if (engine.getSdCardMountPath() != "")
         {
             listModel.append({ "section": "Storage devices",
                                "name": "SD card",
                                "thumbnail": "qrc:/icons/sdcard",
-                               "location": "/run/user/100000/media/sdcard"})
+                               "location": engine.getSdCardMountPath()})
         }
     }
 

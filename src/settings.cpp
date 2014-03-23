@@ -5,6 +5,8 @@ Settings::Settings(QObject *parent) :
 {
     qDebug() << "Reading config";
 
+    loadBookmarks();
+
     settings = new QSettings("Matoking", "Filetug");
 
     // Get stored values
@@ -77,6 +79,101 @@ Settings::Settings(QObject *parent) :
         m_showBlackBackground = settings->value("showBlackBackground").toBool();
     else
         m_showBlackBackground = true;
+}
+
+void Settings::loadBookmarks()
+{
+    // Try creating the directory if it doesn't exist
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    if (!dir.exists())
+        dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+
+    // Load the bookmark list
+    QFile bookmarkFile(QString("%1/bookmarks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation)));
+
+    bookmarkFile.open(QIODevice::ReadOnly);
+
+    if (bookmarkFile.exists())
+    {
+        QJsonArray bookmarkArray = QJsonDocument::fromJson(bookmarkFile.readAll()).array();
+
+        m_bookmarkMap.clear();
+
+        for (int i=0; i < bookmarkArray.size(); i++)
+        {
+            QJsonObject bookmarkEntry = bookmarkArray.at(i).toObject();
+
+            m_bookmarkMap.insert(bookmarkEntry.value("path").toString(), bookmarkEntry.value("title").toString());
+        }
+    }
+
+    bookmarkFile.close();
+}
+
+void Settings::saveBookmarks()
+{
+    QFile bookmarkFile(QString("%1/bookmarks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation)));
+
+    bookmarkFile.open(QIODevice::WriteOnly);
+
+    QJsonArray jsonArray;
+
+    QMapIterator<QString, QVariant> i(m_bookmarkMap);
+    while (i.hasNext())
+    {
+        i.next();
+
+        QString path = i.key();
+        QString title = i.value().toString();
+
+        QJsonObject entryObject;
+        entryObject.insert("path", QJsonValue::fromVariant(QVariant::fromValue(path)));
+        entryObject.insert("title", QJsonValue::fromVariant(QVariant::fromValue(title)));
+
+        jsonArray.append(QJsonValue(entryObject));
+    }
+
+    // Save bookmark list as JSON-encoded string
+    QJsonDocument jsonDocument(jsonArray);
+
+    QByteArray jsonString = jsonDocument.toJson();
+
+    bookmarkFile.resize(0);
+    bookmarkFile.write(jsonString);
+
+    bookmarkFile.flush();
+    bookmarkFile.close();
+}
+
+QVariant Settings::getBookmarks()
+{
+    return QVariant::fromValue(m_bookmarkMap);
+}
+
+/*
+ *  Adds a bookmark path with a title
+ */
+void Settings::addBookmarkPath(const QString &dirPath, const QString &title)
+{
+    // Delete the existing bookmark if it exists
+    m_bookmarkMap.remove(dirPath);
+
+    m_bookmarkMap.insert(dirPath, title);
+
+    saveBookmarks();
+}
+
+void Settings::removeBookmarkPath(const QString &dirPath)
+{
+    if (m_bookmarkMap.contains(dirPath))
+        m_bookmarkMap.remove(dirPath);
+
+    saveBookmarks();
+}
+
+bool Settings::isPathInBookmarks(const QString &dirPath)
+{
+    return m_bookmarkMap.contains(dirPath);
 }
 
 /*

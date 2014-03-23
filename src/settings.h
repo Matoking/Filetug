@@ -3,9 +3,14 @@
 
 #include <QObject>
 #include <QString>
+#include <QMap>
 #include <QDebug>
 #include <QSettings>
 #include <QDir>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QStandardPaths>
 
 class Settings : public QObject
 {
@@ -34,6 +39,12 @@ public:
     explicit Settings(QObject *parent = 0);
 
     QSettings *settings;
+
+    // Bookmarks
+    Q_INVOKABLE QVariant getBookmarks();
+    Q_INVOKABLE void addBookmarkPath(const QString &dirPath, const QString &title = QString());
+    Q_INVOKABLE void removeBookmarkPath(const QString &dirPath);
+    Q_INVOKABLE bool isPathInBookmarks(const QString &dirPath);
 
     // dirPath
     void setDirPath(const QString &dirPath);
@@ -94,6 +105,11 @@ public:
     bool getShowBlackBackground() const;
 
 private:
+    void loadBookmarks();
+    void saveBookmarks();
+
+    QVariantMap m_bookmarkMap;
+
     QString m_dirPath;
     QString m_defaultViewMode;
     bool m_galleryMode;

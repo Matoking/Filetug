@@ -196,6 +196,10 @@ SilicaListView {
             }
 
             onClicked: {
+                // Don't respond to presses if a new directory view is already being opened
+                if (animateCollapseRight.running || animateCollapseLeft.running)
+                    return
+
                 if (!selectingItems)
                     DirectoryViewModel.openFile(model)
                 else
