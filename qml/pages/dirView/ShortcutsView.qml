@@ -53,7 +53,9 @@ SilicaListView {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingLarge
                 anchors.top: parent.top
-                anchors.topMargin: 5
+                anchors.topMargin: model.location == model.name ? (parent.height / 2) - (height / 2) : 5
+
+                font.pixelSize: model.location == model.name ? Theme.fontSizeExtraSmall : Theme.fontSizeSmall
 
                 text: model.name
             }
@@ -72,6 +74,8 @@ SilicaListView {
                 color: Theme.secondaryColor
 
                 text: model.location
+
+                visible: model.location == model.name ? false : true
             }
             IconButton {
                 anchors.top: parent.top

@@ -12,22 +12,22 @@ PushUpMenu {
     MenuItem {
         id: addToBookmarks
         text: "Add to bookmarks"
+        visible: false
         onClicked: {
             visible = false
             removeFromBookmarks.visible = true
             settings.addBookmarkPath(settings.dirPath, settings.dirPath)
         }
-        visible: !settings.isPathInBookmarks(settings.dirPath)
     }
     MenuItem {
         id: removeFromBookmarks
         text: "Remove from bookmarks"
+        visible: false
         onClicked: {
             visible = false
             addToBookmarks.visible = true
             settings.removeBookmarkPath(settings.dirPath)
         }
-        visible: settings.isPathInBookmarks(settings.dirPath)
     }
     MenuItem {
         text: "Shortcuts"
@@ -50,5 +50,26 @@ PushUpMenu {
 
             DirectoryViewModel.openFile(entry)
         }
+
+        Connections {
+            target: settings
+            onDirPathChanged: {
+                updateBookmarkOptions()
+            }
+        }
+    }
+
+    function updateBookmarkOptions() {
+        if (settings.isPathInBookmarks(settings.dirPath)) {
+            removeFromBookmarks.visible = true
+            addToBookmarks.visible = false
+        } else {
+            removeFromBookmarks.visible = false
+            addToBookmarks.visible = true
+        }
+    }
+
+    Component.onCompleted: {
+        updateBookmarkOptions()
     }
 }
