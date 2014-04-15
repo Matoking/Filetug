@@ -44,8 +44,8 @@ SilicaGridView {
 
     VerticalScrollDecorator { }
 
-    DirectoryPullDownMenu {  }
-    DirectoryPushUpMenu {  }
+    DirectoryPullDownMenu { id: pullDownMenu }
+    DirectoryPushUpMenu { id: pushUpMenu }
 
     // Directory title header
     header: Item {
@@ -274,6 +274,14 @@ SilicaGridView {
     function loadFileList()
     {
         DirectoryViewModel.getFileList(fileModel, path)
+    }
+
+    /*
+     *  Called when the view has been loaded
+     */
+    function viewLoaded()
+    {
+        pushUpMenu.updateBookmarkOptions()
     }
 
     function removeSelections()

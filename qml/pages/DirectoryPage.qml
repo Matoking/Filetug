@@ -164,9 +164,7 @@ Page {
                 break;
         }
 
-        var newDir = component.createObject(directoryListRow, { "path": path, "directoryView": mainPage })
-
-        currentView = newDir
+        currentView = component.createObject(directoryListRow, { "path": path, "directoryView": mainPage })
 
         settings.dirPath = path
 
@@ -177,31 +175,32 @@ Page {
         // Collapse the current directory
         if (directoryListRow.children.length > 1)
         {
-            var currentDir = directoryListRow.children[0]
+            var oldView = directoryListRow.children[0]
 
             if (skipAnimation)
             {
-                currentDir.destroy()
-                newDir.x = 0
-                newDir.loadFileList()
+                oldView.destroy()
+                currentView.x = 0
+                currentView.loadFileList()
             }
             else if (collapseDirection == "left")
             {
-                currentDir.x = 0
-                currentDir.collapseToLeft(true)
-                newDir.x = mainPage.width
-                newDir.collapseToLeft(false)
+                oldView.x = 0
+                oldView.collapseToLeft(true)
+                currentView.x = mainPage.width
+                currentView.collapseToLeft(false)
             }
             else
             {
-                currentDir.x = 0
-                currentDir.collapseToRight(true)
-                newDir.x = 0 - mainPage.width
-                newDir.collapseToRight(false)
+                oldView.x = 0
+                oldView.collapseToRight(true)
+                currentView.x = 0 - mainPage.width
+                currentView.collapseToRight(false)
             }
         }
 
-        getDirectoryView().scrollToTop()
+        currentView.scrollToTop()
+        currentView.viewLoaded()
 
         updateBackNavigation()
     }

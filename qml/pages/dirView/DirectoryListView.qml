@@ -42,8 +42,8 @@ SilicaListView {
 
     VerticalScrollDecorator { }
 
-    DirectoryPullDownMenu {  }
-    DirectoryPushUpMenu {  }
+    DirectoryPullDownMenu { id: pullDownMenu }
+    DirectoryPushUpMenu { id: pushUpMenu }
 
     // Directory title header
     header: Item {
@@ -297,6 +297,15 @@ SilicaListView {
     function loadFileList()
     {
         DirectoryViewModel.getFileList(fileModel, path)
+    }
+
+    /*
+     *  Called when the directory page has finished loading this view
+     */
+    function viewLoaded()
+    {
+        // Make sure the add/remove bookmark menu options are updated correctly
+        pushUpMenu.updateBookmarkOptions()
     }
 
     function removeSelections()

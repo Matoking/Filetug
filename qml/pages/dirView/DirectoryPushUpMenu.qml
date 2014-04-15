@@ -50,16 +50,15 @@ PushUpMenu {
 
             DirectoryViewModel.openFile(entry)
         }
-
-        Connections {
-            target: settings
-            onDirPathChanged: {
-                updateBookmarkOptions()
-            }
-        }
     }
 
     function updateBookmarkOptions() {
+        console.log("UPDATED: " + settings.dirPath)
+
+        // Don't display options to add/remove bookmarks in the Shortcuts page
+        if ('isShortcutsPage' in getDirectoryView())
+            return
+
         if (settings.isPathInBookmarks(settings.dirPath)) {
             removeFromBookmarks.visible = true
             addToBookmarks.visible = false
@@ -67,9 +66,5 @@ PushUpMenu {
             removeFromBookmarks.visible = false
             addToBookmarks.visible = true
         }
-    }
-
-    Component.onCompleted: {
-        updateBookmarkOptions()
     }
 }
